@@ -36,4 +36,4 @@ for index, title in enumerate(list_of_titles):
     with open('Source_Material/works_of_json/{}.json'.format(underscored_title), 'w') as play:
         json.dump(play_dict, play)
 
-print('\t!\nsuccessfully split text\n\t!')
+print('*********\nsuccessfully split text\n\********')
