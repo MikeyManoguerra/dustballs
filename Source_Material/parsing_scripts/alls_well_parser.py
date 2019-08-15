@@ -7,6 +7,7 @@ with open('Source_Material/works_of_json/alls_well_that_ends_well.json', 'r') as
 p.close()
 
 act_dicts = []
+
 intro_prep = re.split(
     r'(?<=Tuscany\.)\n', play['ALL\u2019S WELL THAT ENDS WELL'], maxsplit=1)
 intro = intro_prep[0]
@@ -29,42 +30,46 @@ def build_dialogue_dict(character, line):
         'line': line
     }
 
-
 def build_direct_dict(direction):
     return {
         'type': 'direction',
-        'direction': direct[0]
+        'direction': direction
     }
 
+def parse_player_dialouge(line):
+    player_or_direct = re.split(r'(?<=[A-Z]\.)\n+', line)
+    return build_dialogue_dict(player_or_direct[0], player_or_direct[1])
+
+def parse_direction_and_dialogue(index, line):
+    multi_dict_line = []
+    direct = re.split(r'(?<=_\])\n', line)
+    dir_text = build_direct_dict(direct[0])
+    # TODO:  might have a problem with multiple stage directions in a monolouge!
+    if direct[1] != '':
+        current_speaker = parsed_scene[index-1]['character']
+        multi_dict_line.append(build_dialogue_dict(current_speaker, direct[1]))
+        multi_dict_line.append(dir_text)
+        return multi_dict_line
+
+def parse_stage_direction_only(line):  
+    direct = re.split(r'(?<=_\])$', line)
+    return build_direct_dict(direct[0])  
 
 for index, line in enumerate(lines):
-    player_or_direct = re.split(r'(?<=[A-Z]\.)\n+', line)
-
     try:
-        text = build_dialogue_dict(player_or_direct[0], player_or_direct[1])
-
+        parsed_scene.append(parse_player_dialouge(line))
     except IndexError:
         try:
-            direct = re.split(r'(?<=_\])\n', player_or_direct[0])
-            dir_text = build_direct_dict(direct[0])
-            # print(dir_text)
-            if direct[1] != '':
-                current_speaker = parsed_scene[index-1]['character']
-                text = build_dialogue_dict(current_speaker, direct[1])
-            parsed_scene.append(dir_text)
+            multi_dict_line = parse_direction_and_dialogue(index, line)
+            for line_dict in multi_dict_line:
+                parsed_scene.append(line_dict)
         except IndexError:
-            try:
-                direct = re.split(r'(?<=_\])$', player_or_direct[0])
-                text = build_direct_dict(direct[0])
-            except IndexError:
-                text = direct
+            # try:
+            parsed_scene.append(parse_stage_direction_only(line))
+            # except IndexError:
+            #     text = direct
 
-    parsed_scene.append(text)
-
-    # try:
-    #   parsed_scene.append(post_dir_text)
-    # except:
-    #   pass
+   
 
 pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(parsed_scene)
