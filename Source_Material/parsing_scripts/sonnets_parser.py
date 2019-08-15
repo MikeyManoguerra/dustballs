@@ -1,14 +1,11 @@
 import re
 import json
-import pprint
 
 with open('Source_Material/works_of_json/the_sonnets.json', 'r') as s:
     sonnets = json.load(s)
 
 sonnet_dicts = []
-
 sonnet_list = re.split(r'\s+(?=\d)', sonnets['THE SONNETS'])
- 
 
 for sonnet in sonnet_list:
   p = re.split(r'(?<=\d)\n+', sonnet)
@@ -23,8 +20,6 @@ for sonnet in sonnet_list:
     sonnet_dicts.append(poem_info)
   except IndexError:
     pass
- 
 
-pp = pprint.PrettyPrinter(indent=3)
-
-pp.pprint(sonnet_dicts)
+with open('Source_Material/works_of_json/the_sonnets.json', 'w') as sp:
+  json.dump(sonnet_dicts, sp)
