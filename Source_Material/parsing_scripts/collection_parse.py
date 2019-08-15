@@ -31,9 +31,9 @@ for index, title in enumerate(list_of_titles):
       pass
       
     underscored_title = re.sub(r'\s', r'[_]', title)
-    underscored_title = re.sub(r'\W', '', underscored_title)
+    underscored_title = re.sub(r'\W', '', underscored_title).lower()
 
     with open('Source_Material/works_of_json/{}.json'.format(underscored_title), 'w') as play:
         json.dump(play_dict, play)
 
-print('*********\nsuccessfully split text\n\********')
+print('*********\nsuccessfully split text\n********')
