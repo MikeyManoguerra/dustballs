@@ -73,6 +73,7 @@ def parse_scene(scene):
                     parsed_scene.append(line_dict)
             except :
                 try:
+                    # TODO use while loop here
                     previous_line =parsed_scene[index-1]
                     if previous_line['type'] == 'direction':
                         previous_line = parsed_scene[index-2]
