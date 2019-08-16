@@ -3,24 +3,8 @@ import json
 import pprint
 
 with open('Source_Material/works_of_json/alls_well_that_ends_well.json', 'r') as p:
-    play = json.load(p)
+    json_play = json.load(p)
 p.close()
-
-act_dicts = []
-intro_prep = re.split(
-    r'(?<=Tuscany\.)\n', play['ALL\u2019S WELL THAT ENDS WELL'], maxsplit=1)
-intro = intro_prep[0]
-work_body = intro_prep[1]
-
-acts = re.split(r'\n+(?=ACT)', work_body)
-
-# for act in acts:
-scenes = re.split(r'\n+(?=SCENE)', acts[2])
-lines = re.split(
-    r'\n+(?=[A-Z\s]+\.)|\n+\s{2,}(?=\[_)|\n+\s+(?=Enter)', scenes[2])
-
-parsed_scene = []
-
 
 def build_dialogue_dict(character, line):
     return {
@@ -29,44 +13,127 @@ def build_dialogue_dict(character, line):
         'line': line
     }
 
-
 def build_direct_dict(direction):
     return {
         'type': 'direction',
-        'direction': direct[0]
+        'direction': direction
     }
 
-
-for index, line in enumerate(lines):
+def parse_player_dialouge(line):
     player_or_direct = re.split(r'(?<=[A-Z]\.)\n+', line)
+    return build_dialogue_dict(player_or_direct[0], player_or_direct[1])
 
+def parse_direction_and_dialogue(previous_line, line):
+    multi_dict_line = []
     try:
-        text = build_dialogue_dict(player_or_direct[0], player_or_direct[1])
+        direct = re.split(r'(?<=_\])\n', line)
+        dir_text = build_direct_dict(direct[0])
+        # TODO:  might have a problem with multiple stage directions in a monolouge!
+        if direct[1] != '':
+            current_speaker = previous_line['character']
+            multi_dict_line.append(build_dialogue_dict(current_speaker, direct[1]))
+            multi_dict_line.append(dir_text)
+            return multi_dict_line
+    except: 
+        pass
 
-    except IndexError:
+def parse_enter_and_dialogue(previous_line, line):
+    multi_dict_line = []
+    try:
+        direct = re.search(r'Enter\s+\w+\.', line).group(0)
+        direct_and_line= re.split(r'(?<={})\n'.format(direct),line)
+        
+        dir_text = build_direct_dict(direct_and_line[0])
+        if direct_and_line[1] != '':
+            current_speaker = previous_line['character']
+            multi_dict_line.append(dir_text)
+            multi_dict_line.append(build_dialogue_dict(current_speaker, direct_and_line[1]))
+            return multi_dict_line
+    except: 
+            pass
+
+def parse_stage_direction_only(line):  
+    direct = re.split(r'(?<=_\])$', line)
+    return build_direct_dict(direct[0])  
+
+def parse_scene(scene):
+    parsed_scene = []
+    lines = re.split(
+    r'\n+(?=[A-Z\s]+\.)|\n+\s{2,}(?=\[_)|\n+\s+(?=Enter)', scene)
+    
+    for index, line in enumerate(lines):
         try:
-            direct = re.split(r'(?<=_\])\n', player_or_direct[0])
-            dir_text = build_direct_dict(direct[0])
-            # print(dir_text)
-            if direct[1] != '':
-                current_speaker = parsed_scene[index-1]['character']
-                text = build_dialogue_dict(current_speaker, direct[1])
-            parsed_scene.append(dir_text)
+            parsed_scene.append(parse_player_dialouge(line))
         except IndexError:
             try:
-                direct = re.split(r'(?<=_\])$', player_or_direct[0])
-                text = build_direct_dict(direct[0])
-            except IndexError:
-                text = direct
+                previous_line =parsed_scene[index-1]
+                
+                multi_dict_line = parse_direction_and_dialogue(previous_line, line)
+                for line_dict in multi_dict_line:
+                    parsed_scene.append(line_dict)
+            except :
+                try:
+                    previous_line =parsed_scene[index-1]
+                    if previous_line['type'] == 'direction':
+                        previous_line = parsed_scene[index-2]
 
-    parsed_scene.append(text)
+                    multi_dict_line = parse_enter_and_dialogue(previous_line, line)
+                    for line_dict in multi_dict_line:
+                        parsed_scene.append(line_dict) 
+                except :
+                    parsed_scene.append(parse_stage_direction_only(line))
+    
+    # pp =pprint.PrettyPrinter(indent=4)
+    # pp.pprint(parsed_scene)
+    return parsed_scene
 
-    # try:
-    #   parsed_scene.append(post_dir_text)
-    # except:
-    #   pass
+def prep_raw_json(play):
+    # TODO pass title as argument
+    return re.split(
+        r'(?<=Tuscany\.)\n', play['ALL\u2019S WELL THAT ENDS WELL'], maxsplit=1)
 
-pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(parsed_scene)
+intro_prep = prep_raw_json(json_play)
+intro = intro_prep[0]
+work_body = intro_prep[1]
 
-# print(len(lines))
+def restucture_play_body(body):
+    play_body = []
+    acts = re.split(r'ACT\s\w+\.\s*\n', body)
+
+    # VVV to access asingle scene, run this only VVV
+    # scenes = re.split(r'\n+(?=SCENE)', acts[0])
+    # parse_scene(scenes[2])
+
+
+    for act_index, act in enumerate(acts):
+        scenes = re.split(r'\n+(?=SCENE)', act)
+        
+
+        assembled_act = []
+        for scene_index, scene in enumerate(scenes):
+            parsed_scene = parse_scene(scene)
+            scene_dict = {
+                'text': parsed_scene,
+                'act' : act_index + 1,
+                'scene': scene_index+ 1,
+                'title': parsed_scene[0]['direction']
+            }
+            assembled_act.append(scene_dict)
+
+        play_body.append({
+            'Act {}'.format(act_index+1) :assembled_act
+        })
+    return play_body
+
+assembled_play_body = restucture_play_body(work_body)
+
+full_play = {
+    'table_of_contents': intro,
+    'body': assembled_play_body
+}
+
+pp =pprint.PrettyPrinter(indent=4)
+pp.pprint(assembled_play_body)
+
+with open('Source_Material/works_of_json/TEST_alls_well_that_ends_well.json', 'w') as sp:
+  json.dump(full_play, sp)
