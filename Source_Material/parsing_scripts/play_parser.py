@@ -19,11 +19,17 @@ def build_direct_dict(direction):
 
 
 def parse_player_dialouge(line):
+    """
+    handles lines of dialouge, when not seperated by stage direction
+    """
     player_or_direct = re.split(r'(?<=[A-Z]\.)\n+', line)
     return build_dialogue_dict(player_or_direct[0], player_or_direct[1])
 
 
 def parse_direction_and_dialogue(previous_line, line):
+    """
+    handles a line that contains stage direction type /[_._]/ otherwise pass None
+    """
     multi_dict_line = []
     try:
         direct = re.split(r'(?<=_\])\n', line)
@@ -40,6 +46,9 @@ def parse_direction_and_dialogue(previous_line, line):
 
 
 def parse_enter_and_dialogue(previous_line, line):
+    """
+    handles 'Enter' stage direction
+    """
     multi_dict_line = []
     try:
         direct = re.search(r'Enter\s+\w+\.', line).group(0)
@@ -57,11 +66,18 @@ def parse_enter_and_dialogue(previous_line, line):
 
 
 def parse_stage_direction_only(line):
+    """
+    handles stage direction that is not encapulated by dialouge
+    """
     direct = re.split(r'(?<=_\])$', line)
     return build_direct_dict(direct[0])
 
 
 def parse_scene(scene):
+    """
+    function handling parsing of an entire scene
+    """
+
     parsed_scene = []
     lines = re.split(
         r'\n+(?=[A-Z\s]+\.)|\n+\s{2,}(?=\[_)|\n+\s+(?=Enter)', scene)
@@ -97,12 +113,15 @@ def parse_scene(scene):
 
 
 def prep_raw_json(play):
-    # TODO pass title as argument
+    #TODO, handle end of intro univerally
     return re.split(
         r'(?<=Tuscany\.)\n', play, maxsplit=1)
 
 
 def restucture_play_body(body):
+    """
+    runs parse_scene on each ACT
+    """
     play_body = []
     acts = re.split(r'ACT\s\w+\.\s*\n', body)
 
@@ -132,6 +151,9 @@ def restucture_play_body(body):
 
 
 def read_parse_dump_play(play_title):
+    """
+    function to export
+    """
 
     with open('Source_Material/plays/plays_raw/{}.json'.format(play_title), 'r') as p:
         json_play = json.load(p)
