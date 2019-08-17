@@ -2,7 +2,7 @@ import re
 import json
 import pprint
 
-with open('Source_Material/plays/alls_well_that_ends_well.json', 'r') as p:
+with open('Source_Material/plays/plays_raw/alls_well_that_ends_well.json', 'r') as p:
     json_play = json.load(p)
 p.close()
 
@@ -91,7 +91,7 @@ def parse_scene(scene):
 def prep_raw_json(play):
     # TODO pass title as argument
     return re.split(
-        r'(?<=Tuscany\.)\n', play['ALL\u2019S WELL THAT ENDS WELL'], maxsplit=1)
+        r'(?<=Tuscany\.)\n', play, maxsplit=1)
 
 intro_prep = prep_raw_json(json_play)
 intro = intro_prep[0]
@@ -120,7 +120,7 @@ def restucture_play_body(body):
                 'title': parsed_scene[0]['direction']
             }
             assembled_act.append(scene_dict)
-
+            print(scene_dict['title'])    
         play_body.append({
             'Act {}'.format(act_index+1) :assembled_act
         })
@@ -134,7 +134,7 @@ full_play = {
 }
 
 pp =pprint.PrettyPrinter(indent=4)
-pp.pprint(assembled_play_body)
+# pp.pprint(assembled_play_body)
 
-with open('Source_Material/works_of_json/TEST_alls_well_that_ends_well.json', 'w') as sp:
+with open('Source_Material/plays/plays_parsed/alls_well_that_ends_well.json', 'w') as sp:
   json.dump(full_play, sp)

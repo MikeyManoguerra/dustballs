@@ -1,11 +1,11 @@
 import re
 import json
 
-with open('Source_Material/works_of_json/the_sonnets.json', 'r') as s:
+with open('Source_Material/poems_etc/poems_etc_raw/the_sonnets.json', 'r') as s:
     sonnets = json.load(s)
 
 sonnet_dicts = []
-sonnet_list = re.split(r'\s+(?=\d)', sonnets['THE SONNETS'])
+sonnet_list = re.split(r'\s+(?=\d)', sonnets)
 
 for sonnet in sonnet_list:
   p = re.split(r'(?<=\d)\n+', sonnet)
@@ -21,5 +21,5 @@ for sonnet in sonnet_list:
   except IndexError:
     pass
 
-with open('Source_Material/works_of_json/the_sonnets.json', 'w') as sp:
+with open('Source_Material/poems_etc/poems_etc_parsed/the_sonnets.json', 'w') as sp:
   json.dump(sonnet_dicts, sp)

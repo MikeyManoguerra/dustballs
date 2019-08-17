@@ -21,9 +21,7 @@ for index, title in enumerate(list_of_titles):
 
     regex = r'\n(?={})'.format(next_title)
     big_list = re.split(regex, text_to_split,  maxsplit=1)
-    play_dict = {
-        '{}'.format(title): big_list[0]
-    }
+    single_play = big_list[0]
 
     try:
       text_to_split = big_list[1]
@@ -33,7 +31,21 @@ for index, title in enumerate(list_of_titles):
     underscored_title = re.sub(r'\s', r'[_]', title)
     underscored_title = re.sub(r'\W', '', underscored_title).lower()
 
-    with open('Source_Material/works_of_json/{}.json'.format(underscored_title), 'w') as play:
-        json.dump(play_dict, play)
+    non_plays = [
+        'the_passionate_pilgrim',
+        'the_pheonix_and_the_turtle',
+        'the_sonnets',
+        'venus_and_adonis'
+    ]
+
+    if underscored_title in non_plays:
+        with open('Source_Material/poems_etc/poems_etc_raw/{}.json'.format(underscored_title), 'w') as poem:
+            json.dump(single_play, poem)
+
+   
+
+    else:    
+        with open('Source_Material/plays/plays_raw/{}.json'.format(underscored_title), 'w') as play:
+            json.dump(single_play, play)
 
 print('*********\nsuccessfully split text\n********')
