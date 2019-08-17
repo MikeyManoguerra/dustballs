@@ -2,7 +2,7 @@ import re
 import json
 import pprint
 
-with open('Source_Material/works_of_json/alls_well_that_ends_well.json', 'r') as p:
+with open('Source_Material/plays/alls_well_that_ends_well.json', 'r') as p:
     json_play = json.load(p)
 p.close()
 
