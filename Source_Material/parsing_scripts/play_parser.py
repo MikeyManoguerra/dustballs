@@ -115,7 +115,7 @@ def parse_scene(scene):
 def prep_raw_json(play):
     #TODO, handle end of intro univerally
     return re.split(
-        r'(?<=Tuscany\.)\n', play, maxsplit=1)
+        r'\n(?=ACT\sI\.)', play, maxsplit=1)
 
 
 def restucture_play_body(body):
@@ -178,4 +178,3 @@ def read_parse_dump_play(play_title):
 
     print('success')
 
-read_parse_dump_play('alls_well_that_ends_well')

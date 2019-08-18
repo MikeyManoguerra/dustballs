@@ -15,7 +15,6 @@ Shakespeare Scraps generator
 - write a script that automates the parsing of all plays with one command
 - loop over titles file to load raw play file.
 - run univeralized alls_well to parse play into correct format
-- create directory for parsed plays
 - save json file to plays/parsed_plays
 
 
@@ -28,4 +27,5 @@ Shakespeare Scraps generator
 
 ## TODO
 - add postscript to intro txt file
-- save raw play data to txt file
+- save raw play data to txt file?
+- handle choruses and prologues
