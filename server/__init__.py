@@ -1,5 +1,7 @@
 import os
 from flask import Flask
+from .src import sonnets, auth
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -29,9 +31,8 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
-
-    from .src import sonnets
+    
     app.register_blueprint(sonnets.bp)
+    app.register_blueprint(auth.bp)
 
     return app
-
