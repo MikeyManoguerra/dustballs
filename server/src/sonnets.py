@@ -10,7 +10,7 @@ from flask import (
 from server.src.db.config import get_db
 
 bp = Blueprint('sonnets', __name__, url_prefix='/sonnets')
-
+# curl -i http://localhost:5000/sonnets?query=fool
 
 @bp.route('', methods=('POST', 'GET'))
 def search_sonnets():
