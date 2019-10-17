@@ -16,6 +16,9 @@ def add_author(s):
 
 prepped_sonnets = list(map(add_author, sonnets))
 sonnet_collection.insert_many(prepped_sonnets)
+sonnet_collection.create_index([
+  ("text", "text")
+])
 client.close()
 
 
