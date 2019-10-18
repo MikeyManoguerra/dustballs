@@ -23,7 +23,7 @@ def search_sonnets():
             line_num = index
           
     print(len(queryset))
-    return queryset[0]['text'][line_num]
+    return dumps(queryset)
 
 
 @bp.route('/random', methods=('POST', 'GET'))
@@ -31,9 +31,4 @@ def random_sonnet():
     db = get_db()
     random_number = str(random.randint(1, 155))
     sonnet = db.sonnets.find_one({"title": random_number})
-    full_poem = ''
-    for line in sonnet['text']:
-       full_poem = full_poem + (line+'\n')
-    print(dumps(sonnet))
-
     return dumps(sonnet)
