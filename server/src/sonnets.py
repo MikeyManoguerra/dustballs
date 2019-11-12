@@ -12,17 +12,20 @@ from server.src.db.config import get_db
 bp = Blueprint('sonnets', __name__, url_prefix='/sonnets')
 # curl -i http://localhost:5000/sonnets?query=fool
 
+
 @bp.route('', methods=('POST', 'GET'))
 def search_sonnets():
     db = get_db()
     query = request.args.get('query')
     queryset = list(db.sonnets.find({"$text": {"$search": query}}))
-    line_num = None
-    for index, line in enumerate(queryset[0]['text']):
-        if re.search(query, line):
-            line_num = index
-          
-    print(len(queryset))
+
+# find the query in each sonnet and add the index as a field to the object
+    for sonnet in queryset:
+        for index, line in enumerate(sonnet['text']):
+            if re.search(query, line):
+                line_num = index
+                sonnet['query_index'] = index
+    print(queryset[0])
     return dumps(queryset)
 
 
