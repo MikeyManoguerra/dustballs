@@ -15,19 +15,22 @@ bp = Blueprint('sonnets', __name__, url_prefix='/sonnets')
 
 @bp.route('', methods=('POST', 'GET'))
 def search_sonnets():
-    db = get_db()
-    query = request.args.get('query')
-    queryset = list(db.sonnets.find({"$text": {"$search": query}}))
+    try:
+        db = get_db()
+        query = request.args.get('query')
+        queryset = list(db.sonnets.find({"$text": {"$search": query}}))
 
 # find the query in each sonnet and add the index as a field to the object
-    for sonnet in queryset:
-        for index, line in enumerate(sonnet['text']):
-            if re.search(query, line):
-                line_num = index
-                sonnet['query_index'] = index
-    print(queryset[0])
-    return dumps(queryset)
-
+        for sonnet in queryset:
+            for index, line in enumerate(sonnet['text']):
+                if re.search(query, line):
+                    line_num = index
+                    sonnet['query_index'] = index
+        print(queryset[0])
+        return dumps(queryset)
+    except IndexError as err:
+        print(err)
+        return dumps([])    
 
 @bp.route('/random', methods=('POST', 'GET'))
 def random_sonnet():
