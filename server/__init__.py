@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from .src import sonnets, auth
+from flask_cors import CORS
 
 
 def create_app(test_config=None):
@@ -9,6 +10,8 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
     )
+
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
     # from .src.db import config
     # config.init_app(app)

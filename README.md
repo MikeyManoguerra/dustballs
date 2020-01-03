@@ -1,6 +1,11 @@
 Shakespeare Scraps generator
 (dustballs)
 
+### how to start the server
+
+`export FLASK_APP=server;
+export FLASK_ENV=development;
+flask run`
 
 
 ## Where are we so far
