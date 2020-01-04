@@ -19,6 +19,7 @@ export default function SonnetDisplay() {
   const [randomSonnet, setRandomSonnet] = useState<Sonnet>();
   const [snippet, setSnippet] = useState<Array<string>>([]);
   const [currentQuery, setCurrentQuery] = useState<number>(0);
+
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
@@ -36,6 +37,7 @@ export default function SonnetDisplay() {
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     setError('');
+    setCurrentQuery(0);
     const queryResponse: Sonnet[] = await querySonnets(query);
     queryResponse.length ? setQuerySet(queryResponse) : handleEmptyResponse();
     setIsExpanded(false);
@@ -48,8 +50,10 @@ export default function SonnetDisplay() {
 
   function mapSonnetArray(sonnetText: Array<string>) {
     return sonnetText.map((line: string, index) => {
+      const highlight =
+        querySet[currentQuery].query_index === index ? 'highlight' : '';
       return (
-        <li key={index}>
+        <li className={highlight} key={index}>
           <p>{line}</p>
         </li>
       );
@@ -65,7 +69,10 @@ export default function SonnetDisplay() {
 
   function buildSnippetArray(sonnetIndex = 0) {
     const queryIndex = querySet[sonnetIndex].query_index;
-    const start = queryIndex; // - Math.floor(Math.random() * 3);
+    const start =
+      queryIndex <= querySet[sonnetIndex].text.length - 3
+        ? queryIndex
+        : querySet[sonnetIndex].text.length - 3; // - Math.floor(Math.random() * 3);
     const snpt: Array<string> = [];
     for (let i = start; i < start + 3; i++) {
       snpt.push(querySet[sonnetIndex].text[i]);
