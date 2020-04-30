@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from .src import sonnets, auth
+from .src.routes import sonnets, auth, plays
 from flask_cors import CORS
 
 
@@ -34,7 +34,7 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
-    
+
     app.register_blueprint(sonnets.bp)
     app.register_blueprint(auth.bp)
 

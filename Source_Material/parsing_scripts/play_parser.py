@@ -1,3 +1,7 @@
+"""
+parses a play into mongodb friendly objects
+"""
+
 import re
 import json
 import pprint
@@ -102,17 +106,22 @@ def parse_scene(scene):
     return parsed_scene
 
 
-def prep_raw_json(play):
+def prep_raw_text(play):
     # TODO, handle end of intro univerally
     return re.split(r"\n(?=ACT\sI\.)", play, maxsplit=1)
 
 
-def restucture_play_body(body):
+def restucture_play_body(body, title):
     """
     runs parse_scene on each ACT
     """
+
     play_body = []
-    acts = re.split(r"ACT\s\w+\.\s*\n", body)
+    acts = re.split(r"ACT\s\w+\..*\n", body)
+
+    # this can be better but i dont feel like figuring it out right now
+    if acts[0] == '':
+        acts = acts[1:]
 
     # VVV to access asingle scene, run this only VVV
     # scenes = re.split(r'\n+(?=SCENE)', acts[0])
@@ -125,32 +134,40 @@ def restucture_play_body(body):
         for scene_index, scene in enumerate(scenes):
             parsed_scene = parse_scene(scene)
             scene_dict = {
-                "text": parsed_scene,
+                "title": title,
+                "author_first_name": "william",
+                "author_last_name": "shakespeare",
                 "act": act_index + 1,
                 "scene": scene_index + 1,
-                "title": parsed_scene[0]["direction"],
+                "direction": parsed_scene[0]["direction"],
+                "text": parsed_scene,
             }
             assembled_act.append(scene_dict)
             # VVV for checking scenes split successfully VVVV
             # print(scene_dict['title'])
-        play_body.append({"Act {}".format(act_index + 1): assembled_act})
+        play_body.append(assembled_act)
     return play_body
 
 
 def read_parse_dump_play(play_title):
     """
-    function to export
+    function to export, receives tuple
     """
 
-    with open("Source_Material/plays/plays_raw/{}.json".format(play_title), "r") as p:
+    with open("Source_Material/plays/plays_raw/{}.txt".format(play_title[1]), "r") as p:
         json_play = json.load(p)
     p.close()
 
-    intro_prep = prep_raw_json(json_play)
-    intro = intro_prep[0]
+    intro_prep = prep_raw_text(json_play)
+    intro = {
+        "play": play_title[0],
+        "author_first_name": "william",
+        "author_last_name": "shakespeare",
+        "text": intro_prep[0],
+    }
     work_body = intro_prep[1]
 
-    assembled_play_body = restucture_play_body(work_body)
+    assembled_play_body = restucture_play_body(work_body, play_title[0])
 
     full_play = {"table_of_contents": intro, "body": assembled_play_body}
 
@@ -158,9 +175,8 @@ def read_parse_dump_play(play_title):
     # pp.pprint(assembled_play_body)
 
     with open(
-        "Source_Material/plays/plays_parsed/{}.json".format(play_title), "w"
+        "Source_Material/plays/plays_parsed/{}.json".format(play_title[1]), "w"
     ) as sp:
         json.dump(full_play, sp)
 
     print("success")
-

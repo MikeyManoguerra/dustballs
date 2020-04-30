@@ -47,3 +47,7 @@ potenttial data model:
     }
   ]
 }
+
+
+4-26-2020:
+ACT to  SCENE handle newline or remove lines

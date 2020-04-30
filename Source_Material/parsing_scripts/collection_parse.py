@@ -1,3 +1,8 @@
+"""
+this takes the raw text file of the entire folio and splits it into sections 
+by work so they can be worked on one at a time'
+"""
+
 import re
 import json
 
@@ -40,14 +45,14 @@ for index, title in enumerate(list_of_titles):
 
     if underscored_title in non_plays:
         with open(
-            "Source_Material/poems_etc/poems_etc_raw/{}.json".format(underscored_title),
+            "Source_Material/poems_etc/poems_etc_raw/{}.txt".format(underscored_title),
             "w",
         ) as poem:
             json.dump(single_play, poem)
 
     else:
         with open(
-            "Source_Material/plays/plays_raw/{}.json".format(underscored_title), "w"
+            "Source_Material/plays/plays_raw/{}.txt".format(underscored_title), "w"
         ) as play:
             json.dump(single_play, play)
 

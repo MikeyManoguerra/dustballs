@@ -10,9 +10,15 @@ black = "*"
 
 [packages]
 flask-cors = "*"
+pymongo = "*"
 
 [requires]
 python_version = "3.7"
 
 [pipenv]
 allow_prereleases = true
+
+[scripts]
+flask = "flask run"
+seeds = "python ./server/src/db/seed/sonnet_seed.py"
+seedp = "python ./server/src/db/seed/play_seed.py"

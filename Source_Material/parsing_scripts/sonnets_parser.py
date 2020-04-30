@@ -1,7 +1,7 @@
 import re
 import json
 
-with open("Source_Material/poems_etc/poems_etc_raw/the_sonnets.json", "r") as s:
+with open("Source_Material/poems_etc/poems_etc_raw/the_sonnets.txt", "r") as s:
     sonnets = json.load(s)
 
 sonnet_dicts = []

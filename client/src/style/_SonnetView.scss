@@ -1,0 +1,46 @@
+.SonnetView {
+  padding-top: 40px;
+}
+
+.SonnetView__inner {
+  @include grid;
+  grid-template-areas:
+    "form sonnet"
+    "dust dust";
+  grid-template-columns: 1fr 3fr;
+}
+
+.SonnetView__forms {
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+}
+
+.SonnetView__formContent {
+  & + & {
+  margin-top: 20px;
+  }
+}
+
+.SonnetView__formSubmit {
+  margin-top: 20px;
+}
+
+.SonnetView__sonnet {
+  grid-area: sonnet;
+}
+
+.SonnetView__sonnetControls {
+  display: flex;
+  button {
+    margin-left: 20px;
+  }
+}
+
+.error-border {
+  border-color: red;
+}
+
+.highlight {
+  color: red;
+}

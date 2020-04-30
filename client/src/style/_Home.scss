@@ -1,0 +1,41 @@
+.Home {
+  padding-top: 50px;
+}
+
+.Home__inner {
+  @include grid;
+  grid-template-areas:
+    "heading heading"
+    "links picture";
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.Home__header {
+  grid-area: heading;
+  padding-bottom: 40px;
+}
+
+.Home__copy {
+  margin-top: 20px;
+}
+
+.Home__linkList {
+  grid-area: links;
+  display: flex;
+  flex-direction: column;
+}
+
+.Home__linkListItem {
+  margin-top: 40px;
+}
+
+.Home__imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.Home__image {
+  @include adhere;
+  object-fit: cover;
+}
