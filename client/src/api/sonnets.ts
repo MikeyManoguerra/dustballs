@@ -1,27 +1,19 @@
-
-const API_PATH = 'http://localhost:5000'
+import { getApi } from '../fetch'
 
 export async function getRandomSonnet() {
   try {
-    const randomSonnet = await fetch(`${API_PATH}/sonnets/random`, {
-      method: 'GET'
-    })
-    return randomSonnet.json()
+    return await getApi('/sonnets/random')
   }
   catch (err) {
-    console.log(err)
     return err
   }
 }
 
 export async function querySonnets(query: string) {
   try {
-    const sonnetQuerySet = await fetch(`${API_PATH}/sonnets?query=${query}`, {
-      method: 'GET'
-    })
-    return sonnetQuerySet.json()
+    return await getApi(`/sonnets?query=${query}`)
   }
   catch (err) {
-    console.log(err)
+    return err
   }
 }

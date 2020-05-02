@@ -120,7 +120,7 @@ def restucture_play_body(body, title):
     acts = re.split(r"ACT\s\w+\..*\n", body)
 
     # this can be better but i dont feel like figuring it out right now
-    if acts[0] == '':
+    if acts[0] == "":
         acts = acts[1:]
 
     # VVV to access asingle scene, run this only VVV

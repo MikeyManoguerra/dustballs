@@ -1,9 +1,9 @@
 import React, { useEffect, useState, SyntheticEvent } from 'react';
-import { getRandomSonnet, querySonnets } from '../api/sonnets';
+import { getRandomSonnet, querySonnets } from '../api/';
 import AppLinkPrimary from '../components/AppLinkPrimary'
+import Sonnet from '../components/Sonnet'
 
-
-interface Sonnet {
+interface ApiSonnet {
   _id: {};
   type: string;
   title: string;
@@ -16,7 +16,7 @@ interface Sonnet {
 
 export default function SonnetDisplay() {
   const [query, setQuery] = useState('');
-  const [querySet, setQuerySet] = useState<Sonnet[]>([]);
+  const [querySet, setQuerySet] = useState<ApiSonnet[]>([]);
   const [snippet, setSnippet] = useState<Array<string>>([]);
   const [currentQuery, setCurrentQuery] = useState<number>(0);
 
@@ -24,6 +24,7 @@ export default function SonnetDisplay() {
   const [error, setError] = useState<string>('');
 
   async function getSonnet() {
+    // get random sonnet returns an object, so we add it to an array
     setQuerySet([await getRandomSonnet()]);
   }
 
@@ -47,27 +48,16 @@ export default function SonnetDisplay() {
     setError('');
     setCurrentQuery(0);
 
-    const queryResponse: Sonnet[] = await querySonnets(query);
+    const queryResponse: ApiSonnet[] = await querySonnets(query);
     queryResponse.length ? setQuerySet(queryResponse) : handleEmptyResponse();
 
     setIsExpanded(false);
   }
 
   function handleEmptyResponse() {
+    // will become handle404 response
     setQuerySet(querySet);
     setError('error-border');
-  }
-
-  function mapSonnetArray(sonnetText: Array<string>) {
-    return sonnetText.map((line: string, index) => {
-      const highlight =
-        querySet[currentQuery].query_index === index ? 'highlight' : '';
-      return (
-        <li className={highlight} key={index}>
-          <p>{line}</p>
-        </li>
-      );
-    });
   }
 
   function handleDisplayNextSnippet() {
@@ -90,18 +80,13 @@ export default function SonnetDisplay() {
     setSnippet(snpt);
   }
 
-  // const sonnet = mapSonnetArray(randomSonnet.text);
 
   return (
     <div className="SonnetView">
       <div className="SonnetView__inner">
         <div className="SonnetView__forms">
           <div className="SonnetView__formContent">
-            <button
-              onClick={() => getSonnet()}
-            >
-              Get Random Sonnet
-          </button>
+            <button onClick={() => getSonnet()}>Get Random Sonnet</button>
           </div>
           <div className="SonnetView__formContent">
             <form action="GET" onSubmit={e => handleSubmit(e)}>
@@ -128,7 +113,10 @@ export default function SonnetDisplay() {
                   <button onClick={() => handleDisplayNextSnippet()}>next</button>
                 }
               </div>
-              <ul>{mapSonnetArray(isExpanded ? querySet[currentQuery].text : snippet)}</ul>
+                <Sonnet
+                  sonnet={isExpanded ? querySet[currentQuery].text : snippet}
+                  query={query}
+                />
             </div>
           )}
         </div>
