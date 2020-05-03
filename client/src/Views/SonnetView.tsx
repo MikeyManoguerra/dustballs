@@ -1,86 +1,30 @@
-import React, { useEffect, useState, SyntheticEvent } from 'react';
-import { getRandomSonnet, querySonnets } from '../api/';
+import React, { useState, SyntheticEvent } from 'react';
 import AppLinkPrimary from '../components/AppLinkPrimary'
 import Sonnet from '../components/Sonnet'
-
-interface ApiSonnet {
-  _id: {};
-  type: string;
-  title: string;
-  length: number;
-  text: Array<string>;
-  query_index: number;
-  author_last_name: string;
-  author_first_name: string;
-}
+import { useSonnet } from '../hooks/useSonnet'
 
 export default function SonnetDisplay() {
-  const [query, setQuery] = useState('');
-  const [querySet, setQuerySet] = useState<ApiSonnet[]>([]);
-  const [snippet, setSnippet] = useState<Array<string>>([]);
-  const [currentQuery, setCurrentQuery] = useState<number>(0);
+  const {
+    query,
+    snippet,
+    querySet,
+    getSonnet,
+    isExpanded,
+    currentQuery,
+    setIsExpanded,
+    handleUserSubmit,
+    handleDisplayNextSnippet,
+  } = useSonnet()
 
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
 
-  async function getSonnet() {
-    // get random sonnet returns an object, so we add it to an array
-    setQuerySet([await getRandomSonnet()]);
-  }
-
-  useEffect(() => {
-    getSonnet()
-  },
-    []
-  )
-
-  useEffect(() => {
-    if (querySet.length) {
-      buildSnippetArray(currentQuery);
-    }
-  },
-    [querySet, currentQuery]
-  );
+  const [userQuery, setUserQuery] = useState('')
+  const [error, setError] = useState('')
 
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
-
-    setError('');
-    setCurrentQuery(0);
-
-    const queryResponse: ApiSonnet[] = await querySonnets(query);
-    queryResponse.length ? setQuerySet(queryResponse) : handleEmptyResponse();
-
-    setIsExpanded(false);
+    await handleUserSubmit(userQuery)
+    setUserQuery('')
   }
-
-  function handleEmptyResponse() {
-    // will become handle404 response
-    setQuerySet(querySet);
-    setError('error-border');
-  }
-
-  function handleDisplayNextSnippet() {
-    setIsExpanded(false);
-    currentQuery + 1 >= querySet.length
-      ? setCurrentQuery(0)
-      : setCurrentQuery(currentQuery + 1);
-  }
-
-  function buildSnippetArray(sonnetIndex = 0) {
-    const queryIndex = querySet[sonnetIndex].query_index;
-    const start =
-      queryIndex <= querySet[sonnetIndex].text.length - 3
-        ? queryIndex
-        : querySet[sonnetIndex].text.length - 3; // - Math.floor(Math.random() * 3);
-    const snpt: Array<string> = [];
-    for (let i = start; i < start + 3; i++) {
-      snpt.push(querySet[sonnetIndex].text[i]);
-    }
-    setSnippet(snpt);
-  }
-
-
   return (
     <div className="SonnetView">
       <div className="SonnetView__inner">
@@ -94,8 +38,8 @@ export default function SonnetDisplay() {
                 className={error}
                 type="text"
                 name="sonnetQuery"
-                onChange={event => setQuery(event.target.value)}
-                value={query}
+                onChange={event => setUserQuery(event.target.value)}
+                value={userQuery}
                 id=""
               />
               <input className="SonnetView__formSubmit" type="submit" />
@@ -113,10 +57,11 @@ export default function SonnetDisplay() {
                   <button onClick={() => handleDisplayNextSnippet()}>next</button>
                 }
               </div>
-                <Sonnet
-                  sonnet={isExpanded ? querySet[currentQuery].text : snippet}
-                  query={query}
-                />
+              <Sonnet
+                isExpanded={isExpanded}
+                sonnet={isExpanded ? querySet[currentQuery].text : snippet}
+                query={query}
+              />
             </div>
           )}
         </div>

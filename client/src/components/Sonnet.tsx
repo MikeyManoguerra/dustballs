@@ -1,12 +1,25 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, Fragment } from 'react'
+import gsap from 'gsap'
 
 interface TextProps {
+  query: string;
+  isExpanded: boolean;
   sonnet: Array<string>;
   queryIndex?: number; // index of the query in the current array.
-  query: string;
 }
 
-export default function Sonnet({ sonnet, query }: TextProps) {
+export default function Sonnet({ sonnet, query, isExpanded }: TextProps) {
+
+      useEffect(() => {
+        gsap.to(
+          "#snippet",
+          {
+            skewY: '25deg'
+          }
+        )
+      },
+        []
+      )
 
   // if the query appears in the line, put in a span that can have modifier class
   function handleQueryHighlight(line: string) {
@@ -41,10 +54,22 @@ export default function Sonnet({ sonnet, query }: TextProps) {
     );
   });
 
+
+
   return (
-    <ul>
-      {sonnetHtml}
-    </ul>
+    <div id="snippet" className={`Sonnet__text Sonnet__text${isExpanded ? '--sonnet' : '--snippet'}`}>
+      <ul >
+        {sonnetHtml}
+      </ul>
+      <span className="Sonnet__tear"></span>
+      <span className="Sonnet__tear"></span>
+      <span className="Sonnet__tear"></span>
+      <span className="Sonnet__tear"></span>
+      <span className="Sonnet__tearTop"></span>
+      <span className="Sonnet__tearTop"></span>
+      <span className="Sonnet__tearTop"></span>
+
+    </div>
   )
 
 }
