@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getRandomSonnet, querySonnets } from '../api/'
+import { useState, useEffect } from "react";
+import { getRandomSonnet, querySonnets } from "../api/";
 
 interface ApiSonnet {
   _id: {};
@@ -12,31 +12,31 @@ interface ApiSonnet {
   author_first_name: string;
 }
 
-export  function useSonnet() {
-  const [query, setQuery] = useState('');
+export function useSonnet() {
+  const [query, setQuery] = useState("");
   const [querySet, setQuerySet] = useState<ApiSonnet[]>([]);
   const [snippet, setSnippet] = useState<Array<string>>([]);
   const [currentQuery, setCurrentQuery] = useState<number>(0);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   useEffect(() => {
-    getSonnet()
-  },
-  []
-  )
+    getSonnet();
+  }, []);
 
   useEffect(() => {
     if (querySet.length) {
       buildSnippetArray(currentQuery);
     }
-  },
-  [querySet, currentQuery]
-  );
+  }, [querySet, currentQuery]);
 
   async function getSonnet() {
     // get random sonnet returns an object, so we add it to an array
-    setQuerySet([await getRandomSonnet()]);
-    setQuery('')
+    try {
+      setQuerySet([await getRandomSonnet()]);
+      setQuery("");
+    } catch (err) {
+      handleEmptyResponse();
+    }
   }
 
   function handleDisplayNextSnippet() {
@@ -49,11 +49,11 @@ export  function useSonnet() {
   function buildSnippetArray(sonnetIndex = 0) {
     const queryIndex = querySet[sonnetIndex].query_index;
     // sonnets are 14 lines
-    const start =
-      queryIndex <= 11
-        ? queryIndex
-        : 11; // - Math.floor(Math.random() * 3);
-    const snpt: Array<string> = querySet[sonnetIndex].text.slice(start, (start+3));
+    const start = queryIndex <= 11 ? queryIndex : 11; // - Math.floor(Math.random() * 3);
+    const snpt: Array<string> = querySet[sonnetIndex].text.slice(
+      start,
+      start + 3
+    );
     setSnippet(snpt);
   }
 
@@ -63,14 +63,18 @@ export  function useSonnet() {
   }
 
   async function handleUserSubmit(userQuery: string) {
-    const queryResponse: ApiSonnet[] = await querySonnets(userQuery);
-    if (!queryResponse.length) {
-      return handleEmptyResponse();
-    }
+    try {
+      const queryResponse: ApiSonnet[] = await querySonnets(userQuery);
+      if (!queryResponse.length) {
+        return handleEmptyResponse();
+      }
 
-    setQuery(userQuery)
-    setIsExpanded(false)
-    setQuerySet(queryResponse)
+      setQuery(userQuery);
+      setIsExpanded(false);
+      setQuerySet(queryResponse);
+    } catch (err) {
+      handleEmptyResponse();
+    }
   }
 
   return {
@@ -83,5 +87,5 @@ export  function useSonnet() {
     setIsExpanded,
     handleUserSubmit,
     handleDisplayNextSnippet,
-  }
+  };
 }

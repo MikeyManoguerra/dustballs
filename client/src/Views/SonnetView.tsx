@@ -1,6 +1,7 @@
-import React, { useState, SyntheticEvent } from 'react';
+import React, { useState, SyntheticEvent, ChangeEvent } from 'react';
 import AppLinkPrimary from '../components/AppLinkPrimary'
 import Sonnet from '../components/Sonnet'
+import AppInput from '../components/AppInput';
 import { useSonnet } from '../hooks/useSonnet'
 
 export default function SonnetDisplay() {
@@ -25,6 +26,7 @@ export default function SonnetDisplay() {
     await handleUserSubmit(userQuery)
     setUserQuery('')
   }
+
   return (
     <div className="SonnetView">
       <div className="SonnetView__inner">
@@ -34,13 +36,10 @@ export default function SonnetDisplay() {
           </div>
           <div className="SonnetView__formContent">
             <form action="GET" onSubmit={e => handleSubmit(e)}>
-              <input
-                className={error}
-                type="text"
+              <AppInput
                 name="sonnetQuery"
-                onChange={event => setUserQuery(event.target.value)}
                 value={userQuery}
-                id=""
+                onChange={(e:ChangeEvent<HTMLInputElement>) => setUserQuery(e.target.value)}
               />
               <input className="SonnetView__formSubmit" type="submit" />
             </form>
@@ -48,7 +47,7 @@ export default function SonnetDisplay() {
         </div>
         <div className="SonnetView__sonnet">
           {snippet.length && (
-            <div>
+            <div className="SonnetView__SonnetInner">
               <div className="SonnetView__sonnetControls">
                 <p>Sonnet Number:{querySet[currentQuery].title}</p>
                 <button onClick={() => setIsExpanded(!isExpanded)}>expand</button>

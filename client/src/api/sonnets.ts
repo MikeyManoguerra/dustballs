@@ -5,7 +5,7 @@ export async function getRandomSonnet() {
     return await getApi('/sonnets/random')
   }
   catch (err) {
-    return err
+    throw err
   }
 }
 
@@ -14,6 +14,6 @@ export async function querySonnets(query: string) {
     return await getApi(`/sonnets?query=${query}`)
   }
   catch (err) {
-    return err
+    throw err
   }
 }

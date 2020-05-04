@@ -28,6 +28,7 @@
 
 .SonnetView__sonnet {
   grid-area: sonnet;
+  justify-self: center;
 }
 
 .SonnetView__sonnetControls {
@@ -44,3 +45,4 @@
 .highlight {
   color: red;
 }
+

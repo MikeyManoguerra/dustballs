@@ -5,6 +5,6 @@ export async function queryPlays(query: string) {
     return await getApi(`/sonnets?query=${query}`)
   }
   catch (err) {
-    return err
+    throw err
   }
 }
