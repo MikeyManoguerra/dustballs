@@ -9,6 +9,7 @@ import './style/main.scss';
 import SonnetView from './Views/SonnetView'
 import HomeView from './Views/HomeView'
 import PlayView from './Views/PlayView'
+import ScratchView from './Views/ScratchView'
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,9 @@ const App: React.FC = () => {
         </Route>
         <Route path="/plays">
           <PlayView />
+        </Route>
+        <Route path="/scratch">
+          <ScratchView />
         </Route>
         <Route path="/">
           <HomeView />

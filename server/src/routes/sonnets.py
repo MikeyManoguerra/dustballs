@@ -31,7 +31,7 @@ def search_sonnets():
         # find the query in each sonnet and add the index as a field to the object
         for sonnet in queryset:
             for index, line in enumerate(sonnet["text"]):
-                if re.search(query, line):
+                if re.search(query, line, re.IGNORECASE):
                     line_num = index
                     sonnet["query_index"] = index
 

@@ -7,7 +7,7 @@
   grid-template-areas:
     "form sonnet"
     "dust dust";
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 2fr 3fr;
 }
 
 .SonnetView__forms {
@@ -28,6 +28,7 @@
 
 .SonnetView__sonnet {
   grid-area: sonnet;
+  justify-self: center;
 }
 
 .SonnetView__sonnetControls {
@@ -44,3 +45,4 @@
 .highlight {
   color: red;
 }
+

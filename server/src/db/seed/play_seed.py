@@ -45,7 +45,7 @@ table_of_contents.drop()
 
 for play in play_titles:
     if play[1] in temp_leave_out:
-        print(play[0], 'left out')
+        print(play[0], "left out")
         continue
 
     try:
@@ -55,7 +55,7 @@ for play in play_titles:
 
         if len(json_play["body"]) == 1:
             # these need debugging
-            print(play[0], 'bad seperation')
+            print(play[0], "bad seperation")
             continue
 
         table_of_contents.insert_one(json_play["table_of_contents"])
@@ -65,5 +65,5 @@ for play in play_titles:
         print(play)
 
 
-scenes.create_index([("text", "text")])
+scenes.create_index([('$**', 'text')])
 client.close()
