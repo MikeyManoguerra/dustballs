@@ -2,6 +2,7 @@ import React, { useState, SyntheticEvent, ChangeEvent } from 'react';
 import AppLinkPrimary from '../components/AppLinkPrimary'
 import Sonnet from '../components/Sonnet'
 import AppInput from '../components/AppInput';
+import Stage from '../components/Stage'
 import { useSonnet } from '../hooks/useSonnet'
 
 export default function SonnetDisplay() {
@@ -32,17 +33,25 @@ export default function SonnetDisplay() {
       <div className="SonnetView__inner">
         <div className="SonnetView__forms">
           <div className="SonnetView__formContent">
-            <button onClick={() => getSonnet()}>Get Random Sonnet</button>
           </div>
           <div className="SonnetView__formContent">
-            <form action="GET" onSubmit={e => handleSubmit(e)}>
-              <AppInput
-                name="sonnetQuery"
-                value={userQuery}
-                onChange={(e:ChangeEvent<HTMLInputElement>) => setUserQuery(e.target.value)}
-              />
-              <input className="SonnetView__formSubmit" type="submit" />
-            </form>
+            <Stage>
+              <form action="GET" onSubmit={e => handleSubmit(e)}>
+                <AppInput
+                  name="sonnetQuery"
+                  value={userQuery}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => setUserQuery(e.target.value)}
+                />
+                <input className="AppButton" type="submit" />
+                <button
+                  type="button"
+                  className="AppButton"
+                  onClick={() => getSonnet()}
+                >
+                  Get Random Sonnet
+                </button>
+              </form>
+            </Stage>
           </div>
         </div>
         <div className="SonnetView__sonnet">
@@ -50,10 +59,14 @@ export default function SonnetDisplay() {
             <div className="SonnetView__SonnetInner">
               <div className="SonnetView__sonnetControls">
                 <p>Sonnet Number:{querySet[currentQuery].title}</p>
-                <button onClick={() => setIsExpanded(!isExpanded)}>expand</button>
+                <button
+                  className="AppButton"
+                  onClick={() => setIsExpanded(!isExpanded)}>expand</button>
                 {querySet.length > 1
                   &&
-                  <button onClick={() => handleDisplayNextSnippet()}>next</button>
+                  <button
+                    className="AppButton"
+                    onClick={() => handleDisplayNextSnippet()}>next</button>
                 }
               </div>
               <Sonnet

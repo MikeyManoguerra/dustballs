@@ -1,0 +1,27 @@
+.Stage {
+  display: flex;
+  flex-direction: column;
+}
+
+.Stage__valance {
+  height: 50px;
+  background-color: purple;
+  border: 2px solid gold;
+}
+
+.Stage__formWrapper {
+  width: 80%;
+  padding-top: 40px;
+  align-self: center
+}
+
+.Stage__space {
+  display: flex;
+}
+
+.Stage__column {
+    background:red;
+    height: 500px;
+    width: 100px;
+
+}

@@ -13,7 +13,7 @@ interface ApiSonnet {
 }
 
 export function useSonnet() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>("");
   const [querySet, setQuerySet] = useState<ApiSonnet[]>([]);
   const [snippet, setSnippet] = useState<Array<string>>([]);
   const [currentQuery, setCurrentQuery] = useState<number>(0);
@@ -29,7 +29,7 @@ export function useSonnet() {
     }
   }, [querySet, currentQuery]);
 
-  async function getSonnet() {
+  async function getSonnet(): Promise<void> {
     // get random sonnet returns an object, so we add it to an array
     try {
       setQuerySet([await getRandomSonnet()]);
@@ -39,14 +39,14 @@ export function useSonnet() {
     }
   }
 
-  function handleDisplayNextSnippet() {
+  function handleDisplayNextSnippet(): void {
     setIsExpanded(false);
     currentQuery + 1 >= querySet.length
       ? setCurrentQuery(0)
       : setCurrentQuery(currentQuery + 1);
   }
 
-  function buildSnippetArray(sonnetIndex = 0) {
+  function buildSnippetArray(sonnetIndex = 0): void {
     const queryIndex = querySet[sonnetIndex].query_index;
     // sonnets are 14 lines
     const start = queryIndex <= 11 ? queryIndex : 11; // - Math.floor(Math.random() * 3);

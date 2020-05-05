@@ -1,0 +1,12 @@
+.AppInput {
+  width: 100%;
+  border: 0px solid transparent;
+  border-bottom: {
+    width: 2px;
+    style: solid;
+  }
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, black, grey);
+
+
+}
