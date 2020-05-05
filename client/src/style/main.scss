@@ -1,11 +1,12 @@
-@import 'reset';
-@import 'mixins';
+@import 'base/reset';
+@import 'base/mixins';
+@import 'base/lookups';
 
-@import 'AppLinkPrimary';
-@import 'AppInput';
+@import 'views/SonnetView';
+@import 'views/HomeView';
+@import 'views/ScratchView';
 
-@import 'HomeView';
-@import 'SonnetView';
-
-@import 'Sonnet';
-@import 'Stage'
+@import 'components/AppLinkPrimary';
+@import 'components/AppInput';
+@import 'components/Sonnet';
+@import 'components/Stage'

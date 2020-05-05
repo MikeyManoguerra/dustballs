@@ -1,0 +1,27 @@
+
+
+@mixin grid {
+  display: grid;
+  margin-left: 20px;
+  margin-right: 20px;
+  grid-gap: 10px;
+}
+
+@mixin  adhere {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+}
+
+@mixin transition($property, $duration: time(), $timing-function: ease()) {
+  transition: {
+    property: $property;
+    duration: $duration;
+    timing-function: $timing-function;
+  }
+}
+
+

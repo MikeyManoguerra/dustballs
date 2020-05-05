@@ -1,0 +1,38 @@
+$red: #C91517;
+$dark-red:#A30F0F;
+$light-green: #58AB7B;
+$green:#27A45F;
+$dark-green:#2F7951;
+$light-blue:#58ABA3;
+$yellow:#F5CD2D;
+$gold:#C7A20E;
+$light-grey:#9F9792;
+$grey:#746B57;
+$dark-grey:#373124;
+
+
+// @function color($key) {
+//   @return map-get($colors, $key);
+// }
+
+// Easing (material defaults)
+$eases: (
+  default: cubic-bezier(0.4, 0, 0.2, 1),
+  accelerate: cubic-bezier(0.4, 0, 1, 1),
+  decelerate: cubic-bezier(0, 0, 0.2, 1),
+);
+
+@function ease($key: default) {
+  @return map-get($eases, $key);
+}
+
+// Time
+$time: (
+  fast: 250ms,
+  default: 500ms,
+  slow: 750ms,
+);
+
+@function time($key: fast) {
+  @return map-get($time, $key);
+}
