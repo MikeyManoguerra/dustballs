@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   font-family: monospace;
+  box-sizing: border-box;
 }
 
 a {
@@ -13,7 +14,8 @@ a {
   }
 }
 
-ul, ol {
+ul,
+ol {
   list-style-type: none;
   padding: 0;
   margin: 0;
