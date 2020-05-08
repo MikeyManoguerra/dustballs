@@ -1,154 +1,88 @@
 .Scratch {
-  // display: flex;
-  justify-content: space-around;
-  margin: 100px;
+  @include grid(0px);
+  grid-template-areas:
+    "valence valence valence"
+    "left form right";
+
   margin-top: 200px;
+  max-width: 1000px;
+}
+
+.Scratch__valenceWrap {
+  grid-area: valence;
+  width: 100%;
+  z-index: 1;
+}
+
+.Scratch__valenceUpper {
+  border-bottom-left-radius: 40px 100%;
+  border-bottom-right-radius: 40px 100%;
+  width: 100%;
+  height: 25px;
+  background-image: linear-gradient($dark-grey, $dark-red);
+}
+.Scratch__valenceLower {
+  border-bottom-left-radius: 40px 100%;
+  border-bottom-right-radius: 40px 100%;
+  width: calc(100% - 80px);
+  height: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: $dark-red;
+  border-bottom: 2px solid $gold;
+}
+
+.Scratch__leftColumn {
+  grid-area: left;
+  justify-self: start;
+}
+
+.Scratch__form {
+  padding-top: 50px;
+  grid-area: form;
+}
+
+.Scratch__buttonWrap {
+  padding-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.Scratch__rightColumn {
+  grid-area: right;
+  justify-self: end;
 }
 
 .Scratch__column {
-  // display: none;
-
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;
+  width: 190px;
+  overflow-x: hidden;
+  margin-left: 60px;
 }
 
 .Scratch__column--small {
-  transform: scale(0.7, 0.8) translate(50px, -100px);
-}
-
-.Scratch__columnWrapper {
-  position: relative;
-  width: 110px;
-  height: 500px;
-  align-self: center;
-  overflow: hidden;
-
-  border-top-right-radius: 20px 300px;
-  border-top-left-radius: 20px 300px;
-
-  // temp
-  transform: translateY(-50px);
-
-  // &::after {
-  // position: absolute;
-  // top: 0;
-  // right: 0;
-  // width: 100%;
-  // height: 50px;
-
-  // content: '';
-  // }
-}
-
-.Scratch__columnImage {
-  @include adhere;
-  object-fit: cover;
-}
-
-.Scratch__columnBase {
-  // temp
-  transform: translateY(-55px);
-}
-.Scratch__columnBaseSide {
-  display: inline-block;
-
-  &:nth-child(1) {
-    transform: matrix(0.5, 0.7, 0, 1, 16, -21);
-    .Scratch__columnBaseTopWing {
-      &::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 0;
-        border-top: 10px solid $grey;
-        border-left: 10px solid $grey;
-        transform: translateX(-85%);
-        content: "";
-      }
-    }
-  }
-
-  &:nth-child(3) {
-    transform: matrix(0.5, -0.7, 0, 1, -16, -21);
-    .Scratch__columnBaseTopWing {
-      &::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 0;
-        border-top: 10px solid $grey;
-        border-right: 10px solid $grey;
-        transform: translateX(85%);
-        content: "";
-      }
-    }
-  }
-}
-
-.Scratch__columnBaseTopGold {
-  height: 10px;
-  background-color: $gold;
-}
-
-.Scratch__columnBaseTopBlock {
-  height: 15px;
-  background-color: $light-grey;
-}
-
-.Scratch__columnBaseTopWing {
-  position: relative;
-  height: 10px;
-  // todo revisit
-  background-color: $grey;
-}
-
-.Scratch__columnBasePlate {
-  padding: 18px 12px;
-  background-color: $light-grey;
-  background-image: linear-gradient($light-grey 80%, $grey);
-}
-
-.Scratch__columnAccentBorder {
-  display: inline-block;
-  padding: 2px;
-  background-color: $grey;
-  border: 2px solid $dark-red;
-}
-
-.Scratch__columnAccent {
-  width: 0;
-  height: 100px;
-  border-top: 15px solid $light-blue;
-  border-right: 15px solid $green;
-  border-bottom: 15px solid $dark-green;
-  border-left: 15px solid $light-green;
+  transform: scale(0.7, 0.8);
+  transform-origin: top;
+  margin-right: 40px;
+  margin-left: auto;
 }
 
 .Scratch__buttressWrap {
   display: flex;
-}
-
-.Scratch__buttressTop {
-  position: relative;
-  height: 100px;
-  background-color: $red;
-  z-index: 1;
+  justify-content: center;
+  padding-bottom: 25px; //for gold cap after el
 }
 
 .Scratch__buttress {
   position: relative;
-  display: inline-block;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   border-top-right-radius: 50% 50%;
   background-color: $grey;
-  transform: translate(10px, -10px);
-  // border-top: 4px solid $red;
-  // border-right: 4px solid $red;
+  transform: translate(5px, -5px);
+  flex-shrink: 0;
 
   &::after {
     position: absolute;
@@ -158,54 +92,160 @@
     height: 100%;
     border-top-right-radius: 100% 100%;
     background-color: #fff;
-    border-top: 4px solid $yellow;
-    border-right: 4px solid $yellow;
+    border-top: 2px solid $yellow;
+    border-right: 2px solid $yellow;
     content: "";
   }
 }
 
 .Scratch__butress--right {
-  transform: scaleX(-1) translate(10px, -10px);
+  transform: scaleX(-1) translate(5px, -5px);
 }
 
 .Scratch__columnTop {
   position: relative;
   display: inline-block;
   z-index: 1;
-  height: 150px;
-  width: 75px;
+  height: 100px;
+  width: 37px;
   background-color: $dark-grey;
+  flex-shrink: 0;
+
+  // gold cap. needs redesign, or image
   &::after {
     position: absolute;
     bottom: 0;
     right: 50%;
     width: 130%;
     height: 0;
-    border-top:60px solid $gold;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    content: '';
+    border-top: 30px solid $gold;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    content: "";
     transform: translate(50%, 100%);
-    }
+  }
 }
 
 .Scratch__buttressCenter {
   position: relative;
-  width: 35px;
-  height: 150px;
+  width: 17px;
+  height: 75px;
   margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 20px;
   background-image: linear-gradient($light-grey, $grey);
-  border-right: 2px solid $yellow;
-  border-left: 2px solid $yellow;
+  border-right: 1px solid $yellow;
+  border-left: 1px solid $yellow;
 }
 
 .Scratch__buttressCenterAccent {
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   margin: 0 auto;
   border-radius: 50% 50% 0 50%;
   background-color: $light-grey;
   transform: rotate(45deg) skewY(30deg);
-
 }
+
+.Scratch__columnImageWrapper {
+  position: relative;
+  width: 55px;
+  height: 250px;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+
+  border-top-right-radius: 5px 150px;
+  border-top-left-radius: 5px 150px;
+}
+
+.Scratch__columnImage {
+  @include adhere;
+  object-fit: cover;
+}
+
+.Scratch__columnBase {
+  display: flex;
+  justify-content: center;
+  flex: 0 0;
+}
+
+.Scratch__columnBaseSide {
+  display: inline-block;
+
+  &:nth-child(1) {
+    transform: matrix(0.5, 0.7, 0, 1, 8.5, -11);
+
+    // TODO redo as modifiers
+    .Scratch__columnBaseTopWing {
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: 5px solid $grey;
+        border-left: 5px solid $grey;
+        transform: translateX(-85%);
+        content: "";
+      }
+    }
+  }
+
+  &:nth-child(3) {
+    transform: matrix(0.5, -0.7, 0, 1, -8.5, -11);
+    .Scratch__columnBaseTopWing {
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 5px solid $grey;
+        border-right: 5px solid $grey;
+        transform: translateX(85%);
+        content: "";
+      }
+    }
+  }
+}
+
+.Scratch__columnBaseTopGold {
+  height: 5px;
+  background-color: $gold;
+}
+
+.Scratch__columnBaseTopBlock {
+  height: 8px;
+  background-color: $light-grey;
+}
+
+.Scratch__columnBaseTopWing {
+  position: relative;
+  height: 5px;
+  // todo revisit
+  background-color: $grey;
+}
+
+.Scratch__columnBasePlate {
+  padding: 9px 6px;
+  background-color: $light-grey;
+  background-image: linear-gradient($light-grey 80%, $grey);
+}
+
+.Scratch__columnAccentBorder {
+  display: inline-block;
+  padding: 1px;
+  background-color: $grey;
+  border: 1px solid $dark-red;
+}
+
+.Scratch__columnAccent {
+  width: 0;
+  height: 50px;
+  border-top: 8px solid $light-blue;
+  border-right: 8px solid $green;
+  border-bottom: 8px solid $dark-green;
+  border-left: 8px solid $light-green;
+}
+
+// TODO: column base floor plange
