@@ -19,7 +19,7 @@ export default function Sonnet({ sonnet, query, isExpanded }: TextProps) {
 
     tl.current.fromTo(snippet.current,
       {
-        opacity:1
+        opacity: 1
       },
       {
         opacity: 0,
@@ -29,7 +29,7 @@ export default function Sonnet({ sonnet, query, isExpanded }: TextProps) {
     )
     tl.current.to(paper.current,
       {
-        height: isExpanded ? '300px' : '75px'
+        height: isExpanded ? '300px' : '100px'
       },
       'size',
     )

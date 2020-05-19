@@ -1,71 +1,78 @@
-import React from 'react'
+import React ,{ReactNode} from 'react'
 import AppInput from '../components/AppInput'
 
-export default function ScratchView() {
+interface StageProps {
+  children?: ReactNode
+}
+
+export default function StageView(props : StageProps) {
+  // const { children } = props.children
   return (
-    <div className="Scratch">
-      <div className="Scratch__valenceWrap">
-        <div className="Scratch__valenceUpper" />
-        <div className="Scratch__valenceLower" />
+    <div className="Stage">
+      {/* <div className="Stage__roof"></div> */}
+      <div className="Stage__valenceWrap">
+        <div className="Stage__valenceUpper" />
+        <div className="Stage__valenceLower" />
       </div>
-      <div className="Scratch__leftColumn">
-        <div className="Scratch__column">
-          <div className="Scratch__buttressWrap">
-            <div className="Scratch__buttress"></div>
-            <div className="Scratch__columnTop">
-              <div className="Scratch__buttressCenter">
-                <div className="Scratch__buttressCenterAccent" />
+      <div className="Stage__leftColumn">
+        <div className="Stage__column">
+          <div className="Stage__buttressWrap">
+            <div className="Stage__buttress"></div>
+            <div className="Stage__columnTop">
+              <div className="Stage__buttressCenter">
+                <div className="Stage__buttressCenterAccent" />
               </div>
             </div>
-            <div className="Scratch__buttress Scratch__butress--right"></div>
+            <div className="Stage__buttress Stage__butress--right"></div>
           </div>
-          <div className="Scratch__columnImageWrapper">
-            <img className="Scratch__columnImage" src="/images/column-texture.jpg" alt="" />
+          <div className="Stage__columnImageWrapper">
+            <img className="Stage__columnImage" src="/images/column-texture.jpg" alt="" />
           </div>
-          <div className="Scratch__columnBase">
-            <div className="Scratch__columnBaseSide">
-              <div className="Scratch__columnBaseTopGold" />
-              <div className="Scratch__columnBaseTopBlock" />
-              <div className="Scratch__columnBaseTopWing" />
-              <div className="Scratch__columnBasePlate">
-                <div className="Scratch__columnAccentBorder">
-                  <div className="Scratch__columnAccent" />
+          <div className="Stage__columnBase">
+            <div className="Stage__columnBaseSide">
+              <div className="Stage__columnBaseTopGold" />
+              <div className="Stage__columnBaseTopBlock" />
+              <div className="Stage__columnBaseTopWing" />
+              <div className="Stage__columnBasePlate">
+                <div className="Stage__columnAccentBorder">
+                  <div className="Stage__columnAccent" />
                 </div>
               </div>
             </div>
-            <div className="Scratch__columnBaseSide">
-              <div className="Scratch__columnBaseTopGold" />
-              <div className="Scratch__columnBaseTopBlock" />
-              <div className="Scratch__columnBaseTopWing" />
-              <div className="Scratch__columnBasePlate">
-                <div className="Scratch__columnAccentBorder">
-                  <div className="Scratch__columnAccent" />
+            <div className="Stage__columnBaseSide">
+              <div className="Stage__columnBaseTopGold" />
+              <div className="Stage__columnBaseTopBlock" />
+              <div className="Stage__columnBaseTopWing" />
+              <div className="Stage__columnBasePlate">
+                <div className="Stage__columnAccentBorder">
+                  <div className="Stage__columnAccent" />
                 </div>
               </div>
             </div>
 
-            <div className="Scratch__columnBaseSide">
-              <div className="Scratch__columnBaseTopGold" />
-              <div className="Scratch__columnBaseTopBlock" />
-              <div className="Scratch__columnBaseTopWing" />
-              <div className="Scratch__columnBasePlate">
-                <div className="Scratch__columnAccentBorder">
-                  <div className="Scratch__columnAccent" />
+            <div className="Stage__columnBaseSide">
+              <div className="Stage__columnBaseTopGold" />
+              <div className="Stage__columnBaseTopBlock" />
+              <div className="Stage__columnBaseTopWing" />
+              <div className="Stage__columnBasePlate">
+                <div className="Stage__columnAccentBorder">
+                  <div className="Stage__columnAccent" />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="Scratch__form">
-
+      <div className="Stage__form">
+      {/* {children} */}
+        {/*
         <form action="GET">
           <AppInput
             name="sonnetQuery"
             value="scratch"
             onChange={() => console.log('yo')}
           />
-          <div className="Scratch__buttonWrap">
+          <div className="Stage__buttonWrap">
             <input className="AppButton" type="submit" />
             <button
               type="button"
@@ -74,51 +81,51 @@ export default function ScratchView() {
               Get Random Sonnet
                 </button>
           </div>
-        </form>
+        </form> */}
       </div>
-      <div className="Scratch__rightColumn">
-        <div className="Scratch__column Scratch__column--small">
-          <div className="Scratch__buttressWrap">
-            <div className="Scratch__buttress"></div>
-            <div className="Scratch__columnTop">
-              <div className="Scratch__buttressCenter">
-                <div className="Scratch__buttressCenterAccent" />
+      <div className="Stage__rightColumn">
+        <div className="Stage__column Stage__column--small">
+          <div className="Stage__buttressWrap">
+            <div className="Stage__buttress"></div>
+            <div className="Stage__columnTop">
+              <div className="Stage__buttressCenter">
+                <div className="Stage__buttressCenterAccent" />
               </div>
             </div>
-            <div className="Scratch__buttress Scratch__butress--right"></div>
+            <div className="Stage__buttress Stage__butress--right"></div>
           </div>
-          <div className="Scratch__columnImageWrapper">
-            <img className="Scratch__columnImage" src="/images/column-texture.jpg" alt="" />
+          <div className="Stage__columnImageWrapper">
+            <img className="Stage__columnImage" src="/images/column-texture.jpg" alt="" />
           </div>
-          <div className="Scratch__columnBase">
-            <div className="Scratch__columnBaseSide">
-              <div className="Scratch__columnBaseTopGold" />
-              <div className="Scratch__columnBaseTopBlock" />
-              <div className="Scratch__columnBaseTopWing" />
-              <div className="Scratch__columnBasePlate">
-                <div className="Scratch__columnAccentBorder">
-                  <div className="Scratch__columnAccent" />
+          <div className="Stage__columnBase">
+            <div className="Stage__columnBaseSide">
+              <div className="Stage__columnBaseTopGold" />
+              <div className="Stage__columnBaseTopBlock" />
+              <div className="Stage__columnBaseTopWing" />
+              <div className="Stage__columnBasePlate">
+                <div className="Stage__columnAccentBorder">
+                  <div className="Stage__columnAccent" />
                 </div>
               </div>
             </div>
-            <div className="Scratch__columnBaseSide">
-              <div className="Scratch__columnBaseTopGold" />
-              <div className="Scratch__columnBaseTopBlock" />
-              <div className="Scratch__columnBaseTopWing" />
-              <div className="Scratch__columnBasePlate">
-                <div className="Scratch__columnAccentBorder">
-                  <div className="Scratch__columnAccent" />
+            <div className="Stage__columnBaseSide">
+              <div className="Stage__columnBaseTopGold" />
+              <div className="Stage__columnBaseTopBlock" />
+              <div className="Stage__columnBaseTopWing" />
+              <div className="Stage__columnBasePlate">
+                <div className="Stage__columnAccentBorder">
+                  <div className="Stage__columnAccent" />
                 </div>
               </div>
             </div>
 
-            <div className="Scratch__columnBaseSide">
-              <div className="Scratch__columnBaseTopGold" />
-              <div className="Scratch__columnBaseTopBlock" />
-              <div className="Scratch__columnBaseTopWing" />
-              <div className="Scratch__columnBasePlate">
-                <div className="Scratch__columnAccentBorder">
-                  <div className="Scratch__columnAccent" />
+            <div className="Stage__columnBaseSide">
+              <div className="Stage__columnBaseTopGold" />
+              <div className="Stage__columnBaseTopBlock" />
+              <div className="Stage__columnBaseTopWing" />
+              <div className="Stage__columnBasePlate">
+                <div className="Stage__columnAccentBorder">
+                  <div className="Stage__columnAccent" />
                 </div>
               </div>
             </div>
