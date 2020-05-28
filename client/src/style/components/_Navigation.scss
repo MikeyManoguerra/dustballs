@@ -1,0 +1,119 @@
+.Navigation {
+  position: relative;
+}
+
+.Navigation__accents {
+  @include adhere;
+  background: repeating-linear-gradient(90deg, #fff, #fff, 50px, $grey 50px, $grey 52px);
+  content: "";
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $grey;
+    content: "";
+    z-index: 1;
+  }
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $grey;
+    content: "";
+  }
+}
+
+.Navigation__accentLeft {
+  @include breakpoint(medium) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 75px solid $grey;
+    border-right: 75px solid transparent;
+    transform: translateY(100%);
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-top: 71px solid white;
+      border-right: 71px solid transparent;
+      content: "";
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.Navigation__accentRight {
+  @include breakpoint(medium) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 75px solid $grey;
+    border-left: 75px solid transparent;
+    transform: translateY(100%);
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border-top: 71px solid white;
+      border-left: 71px solid transparent;
+      content: "";
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.Navigation__listItem {
+  background-color: #fff;
+}
+
+.Navigation__list {
+  position: relative;
+  display: flex;
+  justify-content: right;
+}
+
+.Navigation__link {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid $grey;
+  background-color: white;
+  width: 50px;
+  height: 50px;
+
+  @include transition(background-color);
+
+  &:hover,
+  &:focus {
+    background-color: rgba($gold, 0.1);
+  }
+}
+
+.Navigation__link--arch {
+  min-width: 80px;
+  border-top-left-radius: 30% 90%;
+  border-top-right-radius: 30% 90%;
+  padding: 15px 5px;
+}
+
+.Navigation__homePlaceHolder {
+  display: block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: $red;
+}

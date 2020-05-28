@@ -1,9 +1,6 @@
 import React, { useState, SyntheticEvent, ChangeEvent } from 'react';
-import AppLinkPrimary from '../components/AppLinkPrimary'
-import Sonnet from '../components/Sonnet'
-import AppInput from '../components/AppInput';
-import Stage from '../components/Stage'
-import { useToggle, useSonnet } from '../hooks/'
+import { Sonnet, AppInput, Stage } from '../components'
+import { useToggle, useSonnet } from '../hooks'
 
 export default function SonnetDisplay() {
   const {
@@ -86,8 +83,6 @@ export default function SonnetDisplay() {
           )}
         </div>
       </div>
-
-      <AppLinkPrimary to="/">home</AppLinkPrimary>
     </div>
   );
 }
