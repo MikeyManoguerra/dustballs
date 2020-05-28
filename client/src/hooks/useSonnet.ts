@@ -12,12 +12,11 @@ interface ApiSonnet {
   author_first_name: string;
 }
 
-export function useSonnet() {
-  const [query, setQuery] = useState<string>("");
+export default function useSonnet() {
+  const [query, setQuery] = useState<string>('');
   const [querySet, setQuerySet] = useState<ApiSonnet[]>([]);
   const [snippet, setSnippet] = useState<Array<string>>([]);
   const [currentQuery, setCurrentQuery] = useState<number>(0);
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     getSonnet();
@@ -33,14 +32,14 @@ export function useSonnet() {
     // get random sonnet returns an object, so we add it to an array
     try {
       setQuerySet([await getRandomSonnet()]);
-      setQuery("");
-    } catch (err) {
+      setQuery('');
+    }
+    catch (err) {
       handleEmptyResponse();
     }
   }
 
   function handleDisplayNextSnippet(): void {
-    setIsExpanded(false);
     currentQuery + 1 >= querySet.length
       ? setCurrentQuery(0)
       : setCurrentQuery(currentQuery + 1);
@@ -70,9 +69,9 @@ export function useSonnet() {
       }
 
       setQuery(userQuery);
-      setIsExpanded(false);
       setQuerySet(queryResponse);
-    } catch (err) {
+    }
+    catch (err) {
       handleEmptyResponse();
     }
   }
@@ -82,9 +81,7 @@ export function useSonnet() {
     snippet,
     querySet,
     getSonnet,
-    isExpanded,
     currentQuery,
-    setIsExpanded,
     handleUserSubmit,
     handleDisplayNextSnippet,
   };

@@ -5,8 +5,9 @@
     width: 2px;
     style: solid;
   }
+  height: 30px;
   border-image-slice: 1;
   border-image-source: linear-gradient(to right, black, grey);
-
+  background-color: rgba(255,255,255, .2);
 
 }

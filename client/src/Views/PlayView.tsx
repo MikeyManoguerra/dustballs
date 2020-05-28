@@ -1,5 +1,6 @@
 import React, { useEffect, useState, SyntheticEvent } from 'react';
 import AppLinkPrimary from '../components/AppLinkPrimary'
+import Stage from '../components/Stage'
 import { queryPlays } from '../api';
 
 export default function PlayView() {
@@ -17,6 +18,7 @@ export default function PlayView() {
       <h2 className="PlayView__heading">Plays</h2>
       <AppLinkPrimary to="/">Home</AppLinkPrimary>
       <div className="PlayView__formContent">
+        <Stage>
         <form action="GET" onSubmit={e => handleSubmit(e)}>
           <input
             type="text"
@@ -27,6 +29,7 @@ export default function PlayView() {
           />
           <input className="PlayView__formSubmit" type="submit" />
         </form>
+        </Stage>
       </div>
     </div>
   )

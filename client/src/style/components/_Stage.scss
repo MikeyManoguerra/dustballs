@@ -1,0 +1,271 @@
+.Stage {
+  @include grid(0px);
+  // break grid hardcoded
+  margin-right: 0px;
+  margin-left: -100px;
+  max-width: 800px;
+  grid-template-areas:
+  "valence valence"
+  "left form ";
+  @include breakpoint(medium) {
+    grid-template-areas:
+    "valence valence valence"
+    "left form right";
+    margin-left: 0px;
+  }
+}
+
+.Stage__valenceWrap {
+  grid-area: valence;
+  width: 100%;
+  z-index: 1;
+}
+
+.Stage__valenceUpper {
+  border-bottom-left-radius: 40px 100%;
+  border-bottom-right-radius: 40px 100%;
+  width: 100%;
+  height: 25px;
+  background-image: linear-gradient($dark-grey, $dark-red);
+}
+.Stage__valenceLower {
+  border-bottom-left-radius: 40px 100%;
+  border-bottom-right-radius: 40px 100%;
+  width: calc(100% - 80px);
+  height: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: $dark-red;
+  border-bottom: 2px solid $gold;
+}
+
+.Stage__leftColumn {
+  grid-area: left;
+  justify-self: start;
+}
+
+.Stage__form {
+  grid-area: form;
+  padding-top: 50px;
+  padding-right: 100px;
+
+  @include breakpoint(medium) {
+    padding-right: 0;
+  }
+}
+
+.Stage__buttonWrap {
+  padding-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.Stage__rightColumn {
+  grid-area: right;
+  justify-self: end;
+}
+
+.Stage__column {
+  position: relative;
+  display: block;
+  width: 170px;
+  overflow-x: hidden;
+  margin-left: 60px;
+}
+
+.Stage__column--small {
+  display: none;
+
+  @include breakpoint(medium) {
+    display: block;
+    transform: scale(0.7, 0.8);
+    transform-origin: top;
+    margin-right: 40px;
+    margin-left: auto;
+  }
+}
+
+.Stage__buttressWrap {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 25px; //for gold cap after el
+}
+
+.Stage__buttress {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-top-right-radius: 50% 50%;
+  background-color: $grey;
+  transform: translate(5px, -5px);
+  flex-shrink: 0;
+  clip-path: polygon(35% 6%, 20% 3%, 0 0, 100% 0, 100% 100%, 98% 81%, 94% 65%, 88% 51%, 77% 36%, 65% 24%, 52% 14%);
+  // https://bennettfeely.com/clippy/
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 100% 100%;
+    background-color: transparent;
+    border-top: 2px solid $yellow;
+    border-right: 2px solid $yellow;
+    content: "";
+  }
+}
+
+.Stage__butress--right {
+  transform: scaleX(-1) translate(5px, -5px);
+}
+
+.Stage__columnTop {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  height: 100px;
+  width: 37px;
+  background-color: $dark-grey;
+  flex-shrink: 0;
+
+  // gold cap. needs redesign, or image
+  &::after {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    width: 130%;
+    height: 0;
+    border-top: 30px solid $gold;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    content: "";
+    transform: translate(50%, 100%);
+  }
+}
+
+.Stage__buttressCenter {
+  position: relative;
+  width: 17px;
+  height: 75px;
+  margin: 0 auto;
+  padding-top: 20px;
+  background-image: linear-gradient($light-grey, $grey);
+  border-right: 1px solid $yellow;
+  border-left: 1px solid $yellow;
+}
+
+.Stage__buttressCenterAccent {
+  width: 10px;
+  height: 10px;
+  margin: 0 auto;
+  border-radius: 50% 50% 0 50%;
+  background-color: $light-grey;
+  transform: rotate(45deg) skewY(30deg);
+}
+
+.Stage__columnImageWrapper {
+  position: relative;
+  width: 55px;
+  height: 250px;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+
+  border-top-right-radius: 5px 150px;
+  border-top-left-radius: 5px 150px;
+}
+
+.Stage__columnImage {
+  @include adhere;
+  object-fit: cover;
+  object-position: right top;
+}
+
+.Stage__columnBase {
+  display: flex;
+  justify-content: center;
+  flex: 0 0;
+}
+
+.Stage__columnBaseSide {
+  display: inline-block;
+
+  &:nth-child(1) {
+    transform: matrix(0.5, 0.7, 0, 1, 8.5, -11);
+
+    // TODO redo as modifiers
+    .Stage__columnBaseTopWing {
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: 5px solid $grey;
+        border-left: 5px solid $grey;
+        transform: translateX(-85%);
+        content: "";
+      }
+    }
+  }
+
+  &:nth-child(3) {
+    transform: matrix(0.5, -0.7, 0, 1, -8.5, -11);
+    .Stage__columnBaseTopWing {
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 5px solid $grey;
+        border-right: 5px solid $grey;
+        transform: translateX(85%);
+        content: "";
+      }
+    }
+  }
+}
+
+.Stage__columnBaseTopGold {
+  height: 5px;
+  background-color: $gold;
+}
+
+.Stage__columnBaseTopBlock {
+  height: 8px;
+  background-color: $light-grey;
+}
+
+.Stage__columnBaseTopWing {
+  position: relative;
+  height: 5px;
+  // todo revisit
+  background-color: $grey;
+}
+
+.Stage__columnBasePlate {
+  padding: 9px 6px;
+  background-color: $light-grey;
+  background-image: linear-gradient($light-grey 80%, $grey);
+}
+
+.Stage__columnAccentBorder {
+  display: inline-block;
+  padding: 1px;
+  background-color: $grey;
+  border: 1px solid $dark-red;
+}
+
+.Stage__columnAccent {
+  width: 0;
+  height: 50px;
+  border-top: 8px solid $light-blue;
+  border-right: 8px solid $green;
+  border-bottom: 8px solid $dark-green;
+  border-left: 8px solid $light-green;
+}
+
+// TODO: column base floor plange

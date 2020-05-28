@@ -1,13 +1,33 @@
 .SonnetView {
+  position: relative;
   padding-top: 40px;
+  min-height: 100vh;
+}
+
+.SonnetView__background {
+  @include adhere;
+  opacity: 0.3;
+}
+
+.SonnetView__bgImage {
+  @include adhere;
+  object-fit: cover;
 }
 
 .SonnetView__inner {
+  position: relative;
   @include grid;
   grid-template-areas:
-    "form sonnet"
-    "dust dust";
-  grid-template-columns: 2fr 3fr;
+    "form"
+    "sonnet"
+    "dust";
+
+  @include breakpoint(large) {
+    grid-template-areas:
+      "form sonnet"
+      "dust dust";
+    grid-template-columns: 2fr 3fr;
+  }
 }
 
 .SonnetView__forms {
@@ -18,7 +38,7 @@
 
 .SonnetView__formContent {
   & + & {
-  margin-top: 20px;
+    margin-top: 20px;
   }
 }
 
@@ -45,4 +65,3 @@
 .highlight {
   color: red;
 }
-

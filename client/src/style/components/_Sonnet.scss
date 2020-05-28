@@ -1,0 +1,78 @@
+.Sonnet__background {
+  position: relative;
+  margin-top: 100px;
+  justify-self: center;
+  display: inline-block;
+  background-color: rgb(172, 105, 105);
+  background-color: white;
+  box-shadow: 0 0 10px 10px rgb(172, 105, 105);
+  padding: 10px;
+}
+
+.Sonnet__text {
+  position: relative;
+  display: inline-block;
+  padding: 25px 10px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 10px;
+  // background: linear-gradient(to bottom, rgb(136, 90, 63), rgb(236, 224, 209), rgb(245, 202, 177));
+
+  // &::before {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   border-top: 20px solid rgb(172, 105, 105);
+  //   border-right: 8px solid transparent;
+  //   border-left: 10px solid transparent;
+  //   width: 0;
+  //   height: 0;
+  //   transform: translateX(-5px);
+  //   content: "";
+  // }
+}
+
+// .Sonnet__accent1 {
+//   position: absolute;
+//   display: block;
+//   top: 0;
+//   right: 0;
+//   width: 100px;
+//   height: 15px;
+//   transform: skewX(45deg);
+//   background-color:rgb(172, 105, 105);
+// }
+
+// .Sonnet__accent2 {
+//   position: absolute;
+//   display: block;
+//   bottom: 0;
+//   right: 100px;
+//   width: 0;
+//   height: 0;
+//   border-right: 40px solid transparent;
+//   border-bottom: 8px solid rgb(172, 105, 105);
+//   border-left: 60px solid transparent;
+// }
+
+// .Sonnet__accent3 {
+//   position: absolute;
+//   display: block;
+//   bottom: 0;
+//   left: 0;
+//   width: 100px;
+//   height: 12px;
+//   transform: skewX(30deg) translateX(-20px);
+//   background-color: rgb(172, 105, 105);
+
+  // &::before {
+  //   position: absolute;
+  //   bottom: 0;
+  //   right:0;
+  //   width: 40px;
+  //   height: 100%;
+  //   background-color: red;
+  //   transform: skewX(-55deg) translateX(50%);
+
+  //   content: "";
+  // }
+// }
