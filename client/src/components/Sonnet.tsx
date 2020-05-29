@@ -23,9 +23,9 @@ export default function Sonnet({ sonnet, query, isExpanded }: TextProps) {
       },
       {
         opacity: 0,
-        duration: 0
+        duration: 0.5
       },
-      'size',
+
     )
     tl.current.to(paper.current,
       {
@@ -72,17 +72,16 @@ export default function Sonnet({ sonnet, query, isExpanded }: TextProps) {
   })
 
   return (
-    <div className="Sonnet__background">
+    <div className="Sonnet">
+      <div className="Sonnet__accentTop" />
       <div
         ref={paper}
-        className={`Sonnet__text Sonnet__text${isExpanded ? '--sonnet' : '--snippet'}`}
+        className={`Sonnet__paper Sonnet__paper${isExpanded ? '--sonnet' : '--snippet'}`}
       >
-        <ul ref={snippet}>{sonnetHtml}</ul>
-        <span className="Sonnet__accent1"></span>
-        <span className="Sonnet__accent2"></span>
-        <span className="Sonnet__accent3"></span>
-        <span className="Sonnet__accent4"></span>
+        <ul className="Sonnet__textList" ref={snippet}>{sonnetHtml}</ul>
+
       </div>
+      <div className="Sonnet__accentBottom" />
     </div>
   )
 }

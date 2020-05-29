@@ -37,23 +37,18 @@
 
 .SonnetView__forms {
   grid-area: form;
-  display: flex;
-  flex-direction: column;
 }
 
 .SonnetView__formContent {
-  & + & {
-    margin-top: 20px;
-  }
-}
-
-.SonnetView__formSubmit {
-  margin-top: 20px;
 }
 
 .SonnetView__sonnet {
   grid-area: sonnet;
-  justify-self: center;
+}
+
+.SonnetView__sonnetInner {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .SonnetView__sonnetControls {

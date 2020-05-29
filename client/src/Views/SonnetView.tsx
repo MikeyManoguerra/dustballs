@@ -61,7 +61,7 @@ export default function SonnetDisplay() {
         </div>
         <div className="SonnetView__sonnet">
           {snippet.length && (
-            <div className="SonnetView__SonnetInner">
+            <div className="SonnetView__sonnetInner">
               <div className="SonnetView__sonnetControls">
                 <p>Sonnet Number:{querySet[currentQuery].title}</p>
                 <button
