@@ -18,3 +18,5 @@ build/
 .vscode
 
 node_modules
+.env
+.flaskenv

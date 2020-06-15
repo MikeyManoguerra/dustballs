@@ -11,6 +11,8 @@ black = "*"
 [packages]
 flask-cors = "*"
 pymongo = "*"
+dnspython = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"

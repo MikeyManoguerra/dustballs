@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from .src.routes import sonnets, auth, plays
+from .routes import sonnets, auth, plays
 from flask_cors import CORS
 
 

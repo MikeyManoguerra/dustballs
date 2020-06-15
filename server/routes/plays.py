@@ -15,13 +15,16 @@ from flask import (
     jsonify,
 )
 
-from server.src.db.config import get_db
+from server.db.config import get_db
 
 bp = Blueprint("plays", __name__, url_prefix="/plays")
 #  curl -i http://localhost:5000/plays\?query\=implacable
 
 
 def get_interaction(scene, query):
+    """
+    helper fn to loop over a scene
+    """
     for i, line in enumerate(scene):
         try:
             if re.search(query, line["line"], re.IGNORECASE):
@@ -32,10 +35,10 @@ def get_interaction(scene, query):
             continue
 
     if index < 2:
-        print('beginning')
+        print("beginning")
         interaction = scene[0:6]
     elif index > len(scene) - 3:
-        print('end')
+        print("end")
         interaction = scene[-6:]
     else:
         interaction = scene[(index - 2) : (index + 3)]
@@ -82,4 +85,10 @@ def random_scene():
 # {'type': 'dialouge',
 # 'character': 'FABIAN.',
 # 'line': 'A coward, a most devout coward, religious in it.'},
-#  {'type': 'dialouge', 'character': 'SIR ANDREW.', 'line': '’Slid, I’ll after him again and beat him.'}, {'type': 'dialouge', 'character': 'SIR TOBY.', 'line': 'Do, cuff him soundly, but never draw thy sword.'}, {'type': 'dialouge', 'character': 'SIR ANDREW.', 'line': 'And I do not—'}, {'type': 'direction', 'direction': '[_Exit._]'}, {'type': 'dialouge', 'character': 'FABIAN.', 'line': 'Come, let’s see the event.'}, {'type': 'dialouge', 'character': 'SIR TOBY.', 'line': 'I dare lay any money ’twill be nothing yet.'}, {'type': 'direction', 'direction': '[_Exeunt._]\n\n\n\n'}]}
+#  {'type': 'dialouge', 'character': 'SIR ANDREW.', 'line': '’Slid, I’ll after him again and beat him.'},
+# {'type': 'dialouge', 'character': 'SIR TOBY.', 'line': 'Do, cuff him soundly, but never draw thy sword.'},
+#  {'type': 'dialouge', 'character': 'SIR ANDREW.', 'line': 'And I do not—'},
+#  {'type': 'direction', 'direction': '[_Exit._]'},
+#  {'type': 'dialouge', 'character': 'FABIAN.', 'line': 'Come, let’s see the event.'},
+# {'type': 'dialouge', 'character': 'SIR TOBY.', 'line': 'I dare lay any money ’twill be nothing yet.'},
+# {'type': 'direction', 'direction': '[_Exeunt._]\n\n\n\n'}]}
