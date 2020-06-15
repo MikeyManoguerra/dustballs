@@ -1,11 +1,16 @@
 .SonnetView {
-  position: relative;
-  padding-top: 40px;
+  // position: relative;
+  padding-top: 100px;
+  padding-bottom: 100px;
   min-height: 100vh;
 }
 
 .SonnetView__background {
-  @include adhere;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   opacity: 0.3;
 }
 
@@ -32,23 +37,20 @@
 
 .SonnetView__forms {
   grid-area: form;
-  display: flex;
-  flex-direction: column;
 }
 
 .SonnetView__formContent {
-  & + & {
-    margin-top: 20px;
-  }
-}
-
-.SonnetView__formSubmit {
-  margin-top: 20px;
 }
 
 .SonnetView__sonnet {
   grid-area: sonnet;
-  justify-self: center;
+}
+
+.SonnetView__sonnetInner {
+  @include breakpoint(medium) {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
 }
 
 .SonnetView__sonnetControls {

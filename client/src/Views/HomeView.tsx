@@ -1,5 +1,5 @@
 import React from 'react'
-import AppLinkPrimary from '../components/AppLinkPrimary'
+import { AppLinkPrimary } from '../components'
 
 function HomeView() {
   return (

@@ -1,9 +1,6 @@
 import React, { useState, SyntheticEvent, ChangeEvent } from 'react';
-import AppLinkPrimary from '../components/AppLinkPrimary'
-import Sonnet from '../components/Sonnet'
-import AppInput from '../components/AppInput';
-import Stage from '../components/Stage'
-import { useToggle, useSonnet } from '../hooks/'
+import { Sonnet, AppInput, Stage } from '../components'
+import { useToggle, useSonnet } from '../hooks'
 
 export default function SonnetDisplay() {
   const {
@@ -64,7 +61,7 @@ export default function SonnetDisplay() {
         </div>
         <div className="SonnetView__sonnet">
           {snippet.length && (
-            <div className="SonnetView__SonnetInner">
+            <div className="SonnetView__sonnetInner">
               <div className="SonnetView__sonnetControls">
                 <p>Sonnet Number:{querySet[currentQuery].title}</p>
                 <button
@@ -86,8 +83,6 @@ export default function SonnetDisplay() {
           )}
         </div>
       </div>
-
-      <AppLinkPrimary to="/">home</AppLinkPrimary>
     </div>
   );
 }

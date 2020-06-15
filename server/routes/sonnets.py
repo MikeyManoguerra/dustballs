@@ -15,7 +15,7 @@ from flask import (
     jsonify,
 )
 
-from server.src.db.config import get_db
+from server.db.config import get_db
 
 bp = Blueprint("sonnets", __name__, url_prefix="/sonnets")
 # curl -i http://localhost:5000/sonnets?query=fool
