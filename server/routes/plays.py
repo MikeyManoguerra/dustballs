@@ -15,7 +15,7 @@ from flask import (
     jsonify,
 )
 
-from server.db.config import get_db
+from server import db
 
 bp = Blueprint("plays", __name__, url_prefix="/plays")
 #  curl -i http://localhost:5000/plays\?query\=implacable
@@ -49,7 +49,7 @@ def get_interaction(scene, query):
 @bp.route("", methods=("POST", "GET"))
 def search_scenes():
     try:
-        db = get_db()
+        # db = get_db()
         query = request.args.get("query")
         # exact matches only for now
         queryset = db.scenes.find({"$text": {"$search": f'"{query}"'}})
@@ -76,7 +76,7 @@ def search_scenes():
 @bp.route("/random", methods=("POST", "GET"))
 def random_scene():
 
-    db = get_db()
+    # db = get_db()
     random_number = str(random.randint(1, 155))
     sonnet = db.sonnets.find_one({"title": random_number})
     return dumps([])

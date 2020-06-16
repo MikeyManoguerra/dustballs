@@ -15,7 +15,7 @@ from flask import (
     jsonify,
 )
 
-from server.db.config import get_db
+from server.db import get_db
 
 bp = Blueprint("sonnets", __name__, url_prefix="/sonnets")
 # curl -i http://localhost:5000/sonnets?query=fool
@@ -43,7 +43,7 @@ def search_sonnets():
 
 @bp.route("/random", methods=("POST", "GET"))
 def random_sonnet():
-    db = get_db()
+    # db = get_db()
     random_number = str(random.randint(1, 155))
     sonnet = db.sonnets.find_one({"title": random_number})
     return dumps(sonnet)

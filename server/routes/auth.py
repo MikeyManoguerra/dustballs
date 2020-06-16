@@ -5,7 +5,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from server.db.config import get_db
+from server import db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -16,7 +16,7 @@ def register():
 
         username = request.json['username']
         password = request.json['password']
-        db = get_db()
+        # db = get_db()
         error = None
 
         if not username:
