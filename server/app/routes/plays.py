@@ -17,7 +17,7 @@ from flask import (
 
 
 
-from app import db as connection
+from server.app import db as connection
 
 bp = Blueprint("plays", __name__, url_prefix="/plays")
 #  curl -i http://localhost:5000/plays\?query\=implacable

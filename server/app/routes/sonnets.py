@@ -10,7 +10,7 @@ from flask import (
     Blueprint,
 )
 
-from app import db as connection
+from server.app import db as connection
 
 
 

@@ -3,8 +3,8 @@ from flask import Flask
 from flask_cors import CORS
 from pymongo import MongoClient
 
-from config import Config
-from app.database.connection import Database
+from server.config import Config
+from server.app.database.connection import Database
 
 db = Database()
 
