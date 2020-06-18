@@ -1,21 +1,18 @@
-import functools
-import random
-import re
-from bson.json_util import loads, dumps
 
+import re
+import random
+from bson.json_util import loads, dumps
 from flask import (
-    Blueprint,
-    flash,
     g,
-    redirect,
-    render_template,
     request,
     session,
     url_for,
-    jsonify,
+    Blueprint,
 )
 
-from server.db import get_db
+from app import db as connection
+
+
 
 bp = Blueprint("sonnets", __name__, url_prefix="/sonnets")
 # curl -i http://localhost:5000/sonnets?query=fool
@@ -24,7 +21,7 @@ bp = Blueprint("sonnets", __name__, url_prefix="/sonnets")
 @bp.route("", methods=("POST", "GET"))
 def search_sonnets():
     try:
-        db = get_db()
+        db = connection.get_db()
         query = request.args.get("query")
         queryset = list(db.sonnets.find({"$text": {"$search": query}}))
 
@@ -43,7 +40,7 @@ def search_sonnets():
 
 @bp.route("/random", methods=("POST", "GET"))
 def random_sonnet():
-    # db = get_db()
+    db = connection.get_db()
     random_number = str(random.randint(1, 155))
     sonnet = db.sonnets.find_one({"title": random_number})
     return dumps(sonnet)

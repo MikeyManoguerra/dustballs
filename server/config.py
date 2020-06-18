@@ -7,5 +7,7 @@ load_dotenv(dotenv_path)
 
 
 class Config(object):
-    SECRET_KEY = os.environ.get("SECRET_KEY") or "secret-0w0w0wwow"
-    MONGODB_URI = os.environ.get("MONGODB_URI")
+    SECRET_KEY = os.environ.get("SECRET_KEY") or "flamingo-645744-jar-kale"
+    MONGODB_URI = os.environ.get("MONGODB_URI") or "localhost"
+    DATABASE_NAME = "dustball_db"
+
