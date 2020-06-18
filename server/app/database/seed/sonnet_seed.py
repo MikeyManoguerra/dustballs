@@ -1,5 +1,5 @@
-from pymongo import MongoClient
 import json
+from pymongo import MongoClient
 
 with open("Source_Material/poems_etc/poems_etc_parsed/the_sonnets.json", "r") as s:
     sonnets = json.load(s)

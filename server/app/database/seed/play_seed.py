@@ -1,6 +1,6 @@
-from pymongo import MongoClient
-import json
 import re
+import json
+from pymongo import MongoClient
 
 with open("Source_Material/text_files/titles.txt", "r") as t:
     titles = t.read()
@@ -27,12 +27,12 @@ for index, title in enumerate(list_of_titles):
 
 # these fail in build_play_objects.py for various reasons.
 temp_leave_out = [
-    "the_third_part_of_king_henry_the_sixth",
-    "the_tragedy_of_titus_andronicus",
-    "the_two_noble_kinsmen",
     "a_lovers_complaint",
-    "the_phoenix_and_the_turtle",
     "the_rape_of_lucrece",
+    "the_two_noble_kinsmen",
+    "the_phoenix_and_the_turtle",
+    "the_tragedy_of_titus_andronicus",
+    "the_third_part_of_king_henry_the_sixth",
 ]
 
 client = MongoClient()
