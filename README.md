@@ -32,3 +32,4 @@ flask run`
 - organize style/base
 - stage roof. 
 - stage floor (the boards!)
+https://docs.python.org/3/tutorial/venv.html
