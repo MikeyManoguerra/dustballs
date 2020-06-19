@@ -17,6 +17,14 @@ def create_app(config_class=Config):
     cors = CORS(app, resources={r"/*": {"origins": "*"}})
     db.init_app(app)
 
+    @app.route('/')
+    def hello():
+        return 'Hello, World!'
+
+    @app.route('/ping')
+    def pow():
+        return 'pong!'
+
     from .routes import sonnets, plays
 
     app.register_blueprint(sonnets.bp)
