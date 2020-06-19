@@ -20,12 +20,14 @@ export default function useSonnet() {
 
   useEffect(() => {
     getSonnet();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (querySet.length) {
       buildSnippetArray(currentQuery);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [querySet, currentQuery]);
 
   async function getSonnet(): Promise<void> {

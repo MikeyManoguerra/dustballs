@@ -1,4 +1,4 @@
-import React, { useEffect, useState, SyntheticEvent } from 'react';
+import React, { useState, SyntheticEvent } from 'react';
 import AppLinkPrimary from '../components/AppLinkPrimary'
 import Stage from '../components/Stage'
 import { queryPlays } from '../api';
@@ -19,17 +19,21 @@ export default function PlayView() {
       <AppLinkPrimary to="/">Home</AppLinkPrimary>
       <div className="PlayView__formContent">
         <Stage>
-        <form action="GET" onSubmit={e => handleSubmit(e)}>
-          <input
-            type="text"
-            name="sonnetQuery"
-            onChange={event => setQuery(event.target.value)}
-            value={query}
-            id=""
-          />
-          <input className="PlayView__formSubmit" type="submit" />
-        </form>
+          <form action="GET" onSubmit={e => handleSubmit(e)}>
+            <input
+              type="text"
+              name="sonnetQuery"
+              onChange={event => setQuery(event.target.value)}
+              value={query}
+              id=""
+            />
+            <input className="PlayView__formSubmit" type="submit" />
+          </form>
         </Stage>
+        {querySet.length && (
+          <div>{querySet.length}</div>
+
+        )}
       </div>
     </div>
   )
