@@ -1,4 +1,4 @@
-const API_PATH = 'http://localhost:5000'
+const API_PATH = process.env.NODE_ENV === 'production'? process.env.REACT_APP_API_SERVER :'http://localhost:5000'
 const NOT_FOUND = 'NOT_FOUND'
 const ERROR = 'ERROR'
 
