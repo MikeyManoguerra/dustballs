@@ -1,11 +1,11 @@
-import React ,{ReactNode} from 'react'
-import AppInput from '../components/AppInput'
+import React from 'react'
+
 
 interface StageProps {
   children: JSX.Element
 }
 
-export default function StageView(props : StageProps) {
+export default function StageView(props: StageProps) {
 
   return (
     <div className="Stage">
@@ -17,13 +17,13 @@ export default function StageView(props : StageProps) {
       <div className="Stage__leftColumn">
         <div className="Stage__column">
           <div className="Stage__buttressWrap">
-            <div className="Stage__buttress"/>
+            <div className="Stage__buttress" />
             <div className="Stage__columnTop">
               <div className="Stage__buttressCenter">
                 <div className="Stage__buttressCenterAccent" />
               </div>
             </div>
-            <div className="Stage__buttress Stage__butress--right"/>
+            <div className="Stage__buttress Stage__butress--right" />
           </div>
           <div className="Stage__columnImageWrapper">
             <img className="Stage__columnImage" src="/images/column-texture.jpg" alt="" />
@@ -64,7 +64,7 @@ export default function StageView(props : StageProps) {
         </div>
       </div>
       <div className="Stage__form">
-      {props.children}
+        {props.children}
         {/*
         <form action="GET">
           <AppInput
