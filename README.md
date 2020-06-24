@@ -1,5 +1,6 @@
 [dustballs.app](https://dustballs.app) 
 
+Work in progress, look at the sonnets! 
 
 Shakespeare Scraps generator
 (dustballs)
