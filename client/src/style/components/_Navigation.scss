@@ -4,7 +4,7 @@
 
 .Navigation__accents {
   @include adhere;
-  background: repeating-linear-gradient(90deg, #fff, #fff, 50px, $grey 50px, $grey 52px);
+  background: repeating-linear-gradient(90deg, $white, $white, 50px, $grey 50px, $grey 52px);
   content: "";
 
   &::before {
@@ -44,7 +44,7 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      border-top: 71px solid white;
+      border-top: 71px solid $white;
       border-right: 71px solid transparent;
       content: "";
       transform: translateY(-3px);
@@ -67,7 +67,7 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      border-top: 71px solid white;
+      border-top: 71px solid $white;
       border-left: 71px solid transparent;
       content: "";
       transform: translateY(-3px);
@@ -76,7 +76,7 @@
 }
 
 .Navigation__listItem {
-  background-color: #fff;
+  background-color:$white;
 }
 
 .Navigation__list {
@@ -86,12 +86,14 @@
 }
 
 .Navigation__link {
+  @include nav-link;
+  color: $dark-grey;
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
   border: 2px solid $grey;
-  background-color: white;
+  background-color: $white;
   width: 50px;
   height: 50px;
 
@@ -100,6 +102,7 @@
   &:hover,
   &:focus {
     background-color: rgba($gold, 0.1);
+    text-decoration: underline;
   }
 }
 

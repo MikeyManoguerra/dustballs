@@ -15,6 +15,7 @@ export default function SonnetDisplay() {
 
   const [isExpanded, setIsExpanded] = useToggle()
   const [userQuery, setUserQuery] = useState('')
+  const [pause, setPause] = useState(false)
   // const [error, setError] = useState('')
 
   async function handleSubmit(event: SyntheticEvent) {
@@ -30,49 +31,77 @@ export default function SonnetDisplay() {
     setIsExpanded(false)
   }
 
+  function handleExpand() {
+    if (pause) return
+    // allow for animation to finish. todo: revisit
+    setPause(true)
+    setIsExpanded()
+    setTimeout(() => { setPause(false) }, 1.5 * 1000)
+  }
+
   return (
     <div className="SonnetView">
       <div className="SonnetView__background">
         <img src="/images/wood-texture.jpg" alt="" className="SonnetView__bgImage" />
       </div>
       <div className="SonnetView__inner">
+        <div className="SonnetView__header">
+          <h2 className="SonnetView__heading">
+            Sonnet Search
+          </h2>
+          <p className="SonnetView__body">
+            Search Shakespeare's Sonnets for a word, and you will see snippets of the sonnets that contain your query. Or, get a random sonnet!
+          </p>
+        </div>
         <div className="SonnetView__forms">
-          <div className="SonnetView__formContent">
-            <Stage>
-              <>
-                <form action="GET" onSubmit={e => handleSubmit(e)}>
-                  <AppInput
-                    name="sonnetQuery"
-                    value={userQuery}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setUserQuery(e.target.value)}
-                  />
-                  <input className="AppButton" type="submit" />
-                </form>
-                <button
-                  type="button"
-                  className="AppButton"
-                  onClick={() => getSonnet()}
-                >
-                  Get Random Sonnet
+          <Stage>
+            <>
+              <form
+                className="SonnetView__form"
+                action="GET"
+                onSubmit={e => handleSubmit(e)}
+              >
+                <AppInput
+                  name="sonnetQuery"
+                  value={userQuery}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => setUserQuery(e.target.value)}
+                />
+                <input
+                  className="SonnetView__formButton"
+                  type="submit"
+                  value="Search"
+                />
+              </form>
+              <div className="SonnetView__or">OR</div>
+              <button
+                type="button"
+                className="SonnetView__formButton"
+                onClick={() => getSonnet()}
+              >
+                Get Random
                 </button>
-              </>
-            </Stage>
-          </div>
+            </>
+          </Stage>
         </div>
         <div className="SonnetView__sonnet">
-          {snippet.length && (
+          {snippet.length ? (
             <div className="SonnetView__sonnetInner">
               <div className="SonnetView__sonnetControls">
-                <p>Sonnet Number:{querySet[currentQuery].title}</p>
-                <button
-                  className="AppButton"
-                  onClick={() => setIsExpanded()}>expand</button>
-                {querySet.length > 1
-                  &&
-                  <button
-                    className="AppButton"
-                    onClick={displayNext}>next</button>
-                }
+                <div className="SonnetView__sonnetButtons"><button
+                  className="SonnetView__sonnetButton"
+                  onClick={() => handleExpand()}>expand</button>
+                  {querySet.length > 1
+                    &&
+                    <button
+                      className="SonnetView__sonnetButton"
+                      onClick={displayNext}>next</button>
+                  }
+                </div>
+                <div className="SonnetView__sonnetTitle">
+                  <p >
+                    Sonnet Number:&nbsp;{querySet[currentQuery].title}
+                  </p>
+                </div>
               </div>
               <Sonnet
                 isExpanded={isExpanded}
@@ -80,7 +109,7 @@ export default function SonnetDisplay() {
                 query={query}
               />
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

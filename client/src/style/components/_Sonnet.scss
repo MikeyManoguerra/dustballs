@@ -1,7 +1,7 @@
 .Sonnet {
   position: relative;
   background: radial-gradient(black 10%, transparent 70%);
-  padding: 50px 0px;
+  padding-top: 10px;
 }
 
 $paper-edge: polygon(
@@ -60,13 +60,23 @@ $paper-edge: polygon(
     left: 4px;
     width: calc(100% - 8px);
     height: 100%;
-    background-color: rgb(230, 222, 213);
+    background-color: $tan;
     content: "";
   }
 }
 
 .Sonnet__textList {
   position: relative;
+}
+
+.Sonnet__line {
+  margin-top: 6px;
+  @include body-2;
+  color: $dark-grey;
+}
+
+.Sonnet__line--ending {
+  padding-left: 10px;
 }
 
 .Sonnet__accentBottom {

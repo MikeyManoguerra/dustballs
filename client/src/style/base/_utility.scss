@@ -1,0 +1,66 @@
+@mixin button-primary {
+  position: relative;
+  @include heading-2;
+  display: inline-block;
+  border-top-left-radius: 15px 40%;
+  border-top-right-radius: 15px 40%;
+  color: $white;
+  padding: {
+    top: 5px;
+    right: 55px;
+    bottom: 5px;
+    left: 20px;
+  }
+  background-color: $blue;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    right: 28px;
+    width: 2px;
+    height: 25px;
+    background-color: $white;
+    content: "";
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    position: absolute;
+    top: 15px;
+    right: 28px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-right: 15px solid $white;
+    border-bottom: 5px solid transparent;
+    content: "";
+    @include transition(transform);
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+
+    &::after {
+      transform: translateX(100%) rotateY(180deg);
+    }
+  }
+}
+
+@mixin button-secondary {
+  @include kicker;
+  background-color: $white;
+  border: 2px solid $blue;
+  color: $dark-grey;
+  border-top-left-radius: 15px 40%;
+  border-top-right-radius: 15px 40%;
+  padding: 5px 10px;
+  margin-top: 20px;
+  @include transition((background-color, color));
+
+  &:hover,
+  &:focus {
+    background-color: $blue;
+    color: $white;
+  }
+}

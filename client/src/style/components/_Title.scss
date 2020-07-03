@@ -4,8 +4,9 @@
   margin: 10px 30px;
 
   h1 {
+    @include heading-2;
     position: relative;
-    font-size: 25px;
+    color: $white;
   }
 }
 
@@ -18,4 +19,9 @@
   @include adhere;
   background-color: $blue;
   transform: skewX(25deg);
+  @include transition(transform);
+  .Title__wrapper:hover &,
+  .Title__wrapper:focus &{
+    transform: skewX(20deg)
+  }
 }

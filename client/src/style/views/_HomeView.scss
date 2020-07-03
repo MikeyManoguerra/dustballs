@@ -1,22 +1,40 @@
 .Home {
-  padding-top: 50px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   min-height: 100vh;
 }
 
 .Home__inner {
+  position: relative;
   @include grid;
   grid-template-areas:
-    "heading heading"
-    "links picture";
-  grid-template-columns: repeat(2, 1fr);
+    "heading"
+    "links"
+    "picture";
+  @include breakpoint(large) {
+    grid-template-areas:
+      "heading heading"
+      "links picture";
+    grid-template-columns: 1fr 2fr;
+  }
 }
 
 .Home__header {
   grid-area: heading;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
+  @include breakpoint(large) {
+    padding-bottom: 40px;
+  }
+}
+
+.Home__heading {
+  @include heading-1;
+  color: $dark-grey;
 }
 
 .Home__copy {
+  @include body-1;
+  color: $dark-grey;
   margin-top: 20px;
 }
 
@@ -24,16 +42,23 @@
   grid-area: links;
   display: flex;
   flex-direction: column;
+  padding-bottom: 20px;
 }
 
 .Home__linkListItem {
-  margin-top: 40px;
+  & + & {
+    margin-top: 40px;
+  }
+}
+
+.Home__link {
+  @include button-primary;
 }
 
 .Home__imageWrapper {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 400px;
 }
 
 .Home__image {

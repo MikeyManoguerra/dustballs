@@ -1,0 +1,42 @@
+@mixin heading-1 {
+  font-family: $sans;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 60px;
+  letter-spacing: .2rem;
+}
+
+@mixin heading-2 {
+  font-family: $sans;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: .1rem;
+}
+
+@mixin kicker {
+  font-family: $sans;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: .1rem;
+}
+
+@mixin body-1 {
+  font-family: $serif;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+@mixin nav-link {
+  font-family: $sans;
+  font-size: 16px;
+  font-weight: 300;
+
+}
+
+@mixin body-2 {
+  font-family: $serif ;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: .05rem;
+}
