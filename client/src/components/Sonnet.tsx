@@ -5,7 +5,6 @@ interface TextProps {
   query: string
   isExpanded: boolean
   sonnet: Array<string>
-
   queryIndex?: number // index of the query in the current array.
 }
 
@@ -23,13 +22,13 @@ export default function Sonnet({ sonnet, query, isExpanded }: TextProps) {
       },
       {
         opacity: 0,
-        duration: 0.5
+        duration: 0,
       },
 
     )
     tl.current.to(paper.current,
       {
-        height: isExpanded ? '300px' : '100px'
+        height: isExpanded ? '500px' : '200px'
       },
       'size',
     )
@@ -68,7 +67,14 @@ export default function Sonnet({ sonnet, query, isExpanded }: TextProps) {
   }
 
   const sonnetHtml = sonnet.map((line: string, index) => {
-    return <li key={index}>{handleQueryHighlight(line)}</li>
+    return (
+      <li
+        className={`Sonnet__line ${index > 11 ? "Sonnet__line--ending" : null}`}
+        key={index}
+      >
+        {handleQueryHighlight(line)}
+      </li>
+    )
   })
 
   return (

@@ -5,13 +5,15 @@
   margin-left: -100px;
   max-width: 800px;
   grid-template-areas:
-  "valence valence"
-  "left form ";
+    "valence valence"
+    "left form ";
+  grid-template-columns: 1fr 3fr;
   @include breakpoint(medium) {
     grid-template-areas:
-    "valence valence valence"
-    "left form right";
+      "valence valence valence"
+      "left form right";
     margin-left: 0px;
+    grid-template-columns: 1fr 3fr 1fr;
   }
 }
 
@@ -45,12 +47,24 @@
 }
 
 .Stage__form {
+  position: relative;
   grid-area: form;
-  padding-top: 50px;
+  margin-top: 50px;
   padding-right: 100px;
+  min-width: 150px;
 
   @include breakpoint(medium) {
     padding-right: 0;
+  }
+}
+
+.Stage__formInner {
+  @include breakpoint(medium) {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: calc(100% + 80px);
+    transform: translateX(-50%);
   }
 }
 

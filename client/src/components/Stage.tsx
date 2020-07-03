@@ -64,24 +64,9 @@ export default function StageView(props: StageProps) {
         </div>
       </div>
       <div className="Stage__form">
+      <div className="Stage__formInner">
         {props.children}
-        {/*
-        <form action="GET">
-          <AppInput
-            name="sonnetQuery"
-            value="scratch"
-            onChange={() => console.log('yo')}
-          />
-          <div className="Stage__buttonWrap">
-            <input className="AppButton" type="submit" />
-            <button
-              type="button"
-              className="AppButton"
-            >
-              Get Random Sonnet
-                </button>
-          </div>
-        </form> */}
+      </div>
       </div>
       <div className="Stage__rightColumn">
         <div className="Stage__column Stage__column--small">

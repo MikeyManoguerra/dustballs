@@ -1,11 +1,11 @@
-.SonnetView {
+.PlayView {
   // position: relative;
   padding-top: 100px;
   padding-bottom: 100px;
   min-height: 100vh;
 }
 
-.SonnetView__background {
+.PlayView__background {
   position: fixed;
   top: 0;
   left: 0;
@@ -14,85 +14,76 @@
   opacity: 0.2;
 }
 
-.SonnetView__bgImage {
+.PlayView__bgImage {
   @include adhere;
   object-fit: cover;
 }
 
-.SonnetView__inner {
+.PlayView__inner {
   position: relative;
   @include grid;
   grid-template-areas:
-   "heading"
+    "heading"
     "form"
-    "sonnet"
+    "play"
     "dust";
 
   @include breakpoint(large) {
     grid-template-areas:
       "heading heading"
-      "form sonnet"
+      "form play"
       "dust dust";
     grid-template-columns: 2fr 3fr;
   }
 }
-.SonnetView__header {
+
+.PlayView__header {
   grid-area: heading;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-.SonnetView__heading{
+.PlayView__heading {
   @include heading-1;
   color: $dark-grey;
 }
 
-.SonnetView__body{
+.PlayView__body {
   @include body-1;
   color: $dark-grey;
   margin-top: 10px;
 }
+.PlayView__cone {
+  width: 20px;
+}
 
-.SonnetView__forms {
+.PlayView__forms {
   grid-area: form;
 }
 
-.SonnetView__form {
-  min-width: 150px;
+.PlayView__formContent {
 }
 
-.SonnetView__formButton {
-  @include button-secondary;
-  width: 100%;
-}
-
-
-.SonnetView__or {
-  @include heading-2;
-  color: $blue;
-  margin-top: 20px;
-}
-.SonnetView__sonnet {
-  grid-area: sonnet;
-}
-.SonnetView__sonnetButton{
+.PlayView__formSubmit {
   @include button-secondary;
 }
 
-.SonnetView__sonnetInner {
-  @include breakpoint(medium) {
-    padding-right: 20px;
-    padding-left: 20px;
-  }
-}
-
-.SonnetView__sonnetTitle {
-  @include heading-2;
-}
-
-.SonnetView__sonnetButtons {
+.PlayView__play {
+  grid-area: play;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  background-color: $tan;
+  padding: 10px;
+  border: 2px solid black;
+}
+
+.PlayView__title {
+  @include heading-2;
+}
+
+.PlayView__entry {
+  margin-top: 5px;
+  @include body-2;
 }
 
 .error-border {

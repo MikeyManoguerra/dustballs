@@ -1,26 +1,29 @@
 import React from 'react'
-import { AppLinkPrimary } from '../components'
+import { Link } from 'react-router-dom'
 
-function HomeView() {
+export default function HomeView() {
   return (
     <div className="Home">
+      <div className="PlayView__background">
+        <img src="/images/wood-texture.jpg" alt="" className="PlayView__bgImage" />
+      </div>
       <div className="Home__inner">
         <div className="Home__header">
-          <h1 className="Home__heading">Dustball dot app</h1>
-          <p className="Home__copy"> never know what you might find swept into the corner</p>
+          <h1 className="Home__heading">Dustballs dot app</h1>
+          <p className="Home__copy">You never know what treasure you might find sweapt into the corner</p>
         </div>
         <ul className="Home__linkList">
           <li className="Home__linkListItem">
-            <AppLinkPrimary to="/sonnets">sonnets</AppLinkPrimary>
+            <Link className="Home__link" to="/sonnets">Sonnets</Link>
           </li>
           <li className="Home__linkListItem">
-            <AppLinkPrimary to="/plays">Plays</AppLinkPrimary>
+            <Link className="Home__link" to="/plays">Plays</Link>
           </li>
         </ul>
         <div className="Home__imageWrapper">
           <img
             className="Home__image"
-            src="https://source.unsplash.com/random"
+            src="images/theatre.jpg"
             alt="placeholder"
           />
         </div>
@@ -29,4 +32,3 @@ function HomeView() {
   )
 }
 
-export default HomeView

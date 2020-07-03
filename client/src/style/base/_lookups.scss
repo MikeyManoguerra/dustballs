@@ -10,11 +10,9 @@ $light-grey:#9F9792;
 $grey:#746B57;
 $dark-grey:#373124;
 $blue: #1583E4;
-
-
-// @function color($key) {
-//   @return map-get($colors, $key);
-// }
+$black: #000;
+$white: rgb(252, 253, 246);
+$tan: rgb(230, 222, 213);
 
 // Easing (material defaults)
 $eases: (
