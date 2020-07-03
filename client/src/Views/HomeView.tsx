@@ -10,7 +10,7 @@ export default function HomeView() {
       <div className="Home__inner">
         <div className="Home__header">
           <h1 className="Home__heading">Dustballs dot app</h1>
-          <p className="Home__copy">You never know what treasure you might find sweapt into the corner</p>
+          <p className="Home__copy">You never know what treasure you might find swept into the corner</p>
         </div>
         <ul className="Home__linkList">
           <li className="Home__linkListItem">
