@@ -40,6 +40,7 @@ The client side application is a Typescript React SPA deployed to netlify. Besid
 - stage roof. 
 - stage floor (the boards!)
 - cors
+- add animations
 
 ### how to start the server
 
