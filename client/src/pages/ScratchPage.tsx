@@ -5,7 +5,7 @@ interface StageProps {
   children?: ReactNode
 }
 
-export default function StageView(props : StageProps) {
+export default function StagePage(props : StageProps) {
   // const { children } = props.children
   return (
     <div className="Stage">

@@ -5,36 +5,31 @@ import {
   Route,
 } from 'react-router-dom';
 import './style/main.scss';
-import SonnetView from './Views/SonnetView'
-import HomeView from './Views/HomeView'
-import PlayView from './Views/PlayView'
-import ScratchView from './Views/ScratchView'
-import { Header, Footer } from './components';
+import SonnetPage from './pages/SonnetPage'
+import HomePage from './pages/HomePage'
+import PlayPage from './pages/PlayPage'
+import ScratchPage from './pages/ScratchPage'
 
 const App: React.FC = () => {
   return (
-    <div>
+    <>
       <Router>
-        <Route path="/" component={Header} />
-        <main role="main">
-          <Switch>
-            <Route path="/sonnets">
-              <SonnetView />
-            </Route>
-            <Route path="/plays">
-              <PlayView />
-            </Route>
-            <Route path="/scratch">
-              <ScratchView />
-            </Route>
-            <Route path="/">
-              <HomeView />
-            </Route>
-          </Switch>
-        </main>
-        <Route path="/" component={Footer} />
+        <Switch>
+          <Route path="/sonnets">
+            <SonnetPage />
+          </Route>
+          <Route path="/plays">
+            <PlayPage />
+          </Route>
+          <Route path="/scratch">
+            <ScratchPage />
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
       </Router>
-    </div>
+    </>
   );
 }
 

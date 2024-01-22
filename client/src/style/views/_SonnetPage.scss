@@ -1,11 +1,11 @@
-.PlayView {
+.SonnetPage {
   // position: relative;
   padding-top: 100px;
   padding-bottom: 100px;
   min-height: 100vh;
 }
 
-.PlayView__background {
+.SonnetPage__background {
   position: fixed;
   top: 0;
   left: 0;
@@ -14,76 +14,85 @@
   opacity: 0.2;
 }
 
-.PlayView__bgImage {
+.SonnetPage__bgImage {
   @include adhere;
   object-fit: cover;
 }
 
-.PlayView__inner {
+.SonnetPage__inner {
   position: relative;
   @include grid;
   grid-template-areas:
-    "heading"
+   "heading"
     "form"
-    "play"
+    "sonnet"
     "dust";
 
   @include breakpoint(large) {
     grid-template-areas:
       "heading heading"
-      "form play"
+      "form sonnet"
       "dust dust";
     grid-template-columns: 2fr 3fr;
   }
 }
-
-.PlayView__header {
+.SonnetPage__header {
   grid-area: heading;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-.PlayView__heading {
+.SonnetPage__heading{
   @include heading-1;
   color: $dark-grey;
 }
 
-.PlayView__body {
+.SonnetPage__body{
   @include body-1;
   color: $dark-grey;
   margin-top: 10px;
 }
-.PlayView__cone {
-  width: 20px;
-}
 
-.PlayView__forms {
+.SonnetPage__forms {
   grid-area: form;
 }
 
-.PlayView__formContent {
+.SonnetPage__form {
+  min-width: 150px;
 }
 
-.PlayView__formSubmit {
+.SonnetPage__formButton {
+  @include button-secondary;
+  width: 100%;
+}
+
+
+.SonnetPage__or {
+  @include heading-2;
+  color: $blue;
+  margin-top: 20px;
+}
+.SonnetPage__sonnet {
+  grid-area: sonnet;
+}
+.SonnetPage__sonnetButton{
   @include button-secondary;
 }
 
-.PlayView__play {
-  grid-area: play;
-  display: flex;
-  flex-direction: column;
-  background-color: $tan;
-  padding: 10px;
-  border: 2px solid black;
+.SonnetPage__sonnetInner {
+  @include breakpoint(medium) {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
 }
 
-.PlayView__title {
+.SonnetPage__sonnetTitle {
   @include heading-2;
 }
 
-.PlayView__entry {
-  margin-top: 5px;
-  @include body-2;
+.SonnetPage__sonnetButtons {
+  display: flex;
+  justify-content: space-between;
 }
 
 .error-border {

@@ -5,7 +5,7 @@ interface StageProps {
   children: JSX.Element
 }
 
-export default function StageView(props: StageProps) {
+export default function StagePage(props: StageProps) {
 
   return (
     <div className="Stage">
