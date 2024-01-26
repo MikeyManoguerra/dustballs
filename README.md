@@ -26,6 +26,8 @@ The client side application is a Typescript React SPA deployed to netlify. Besid
 
 ## TODO ( from here down its unfiltered notes at the moment, thanks for stopping by!)
 
+-  DEPRECATION: uWSGI is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+
 - better search. utilize mongodb's search functionailty first
 - more css accents. 
 - improve grid layout.

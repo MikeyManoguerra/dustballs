@@ -2,6 +2,7 @@ import React, { useState, SyntheticEvent, ChangeEvent } from 'react';
 import { Sonnet, AppInput, Stage } from '../components'
 import { useToggle, useSonnet } from '../hooks'
 import BaseLayout from '../layouts/BaseLayout';
+import { Sprite } from '../components/Sprite';
 
 export default function SonnetDisplay() {
   const {
@@ -42,17 +43,22 @@ export default function SonnetDisplay() {
 
   return (
     <BaseLayout>
-      <div className="SonnetPage__header">
-        <h2 className="SonnetPage__heading">
-          Sonnet Search
-        </h2>
-        <p className="SonnetPage__body">
-          Search Shakespeare's Sonnets for a word, and you will see snippets of the sonnets that contain your query. Or, get a random sonnet!
-        </p>
-      </div>
-      <div className="SonnetPage__forms">
-        <Stage>
-          <>
+      <div className="SonnetPage__inner">
+        <div className="SonnetPage__header">
+          <h2 className="SonnetPage__heading">
+            Sonnet Search
+          </h2>
+          <p className="SonnetPage__body">
+            Search Shakespeare's Sonnets for a word, and you will see snippets of the sonnets that contain your query. Or, get a random sonnet!
+          </p>
+        </div>
+        <div className="SonnetPage__forms">
+          <Stage>
+            <Sprite></Sprite>
+          </Stage>
+        </div>
+        <div className="SonnetPage__sonnet">
+          <div>
             <form
               className="SonnetPage__form"
               action="GET"
@@ -77,36 +83,35 @@ export default function SonnetDisplay() {
             >
               Get Random
             </button>
-          </>
-        </Stage>
-      </div>
-      <div className="SonnetPage__sonnet">
-        {snippet.length ? (
-          <div className="SonnetPage__sonnetInner">
-            <div className="SonnetPage__sonnetControls">
-              <div className="SonnetPage__sonnetButtons"><button
-                className="SonnetPage__sonnetButton"
-                onClick={() => handleExpand()}>expand</button>
-                {querySet.length > 1
-                  &&
-                  <button
-                    className="SonnetPage__sonnetButton"
-                    onClick={displayNext}>next</button>
-                }
-              </div>
-              <div className="SonnetPage__sonnetTitle">
-                <p >
-                  Sonnet Number:&nbsp;{querySet[currentQuery].title}
-                </p>
-              </div>
-            </div>
-            <Sonnet
-              isExpanded={isExpanded}
-              sonnet={isExpanded ? querySet[currentQuery].text : snippet}
-              query={query}
-            />
           </div>
-        ) : null}
+
+          {snippet.length ? (
+            <div className="SonnetPage__sonnetInner">
+              <div className="SonnetPage__sonnetControls">
+                <div className="SonnetPage__sonnetButtons"><button
+                  className="SonnetPage__sonnetButton"
+                  onClick={() => handleExpand()}>expand</button>
+                  {querySet.length > 1
+                    &&
+                    <button
+                      className="SonnetPage__sonnetButton"
+                      onClick={displayNext}>next</button>
+                  }
+                </div>
+                <div className="SonnetPage__sonnetTitle">
+                  <p >
+                    Sonnet Number:&nbsp;{querySet[currentQuery].title}
+                  </p>
+                </div>
+              </div>
+              <Sonnet
+                isExpanded={isExpanded}
+                sonnet={isExpanded ? querySet[currentQuery].text : snippet}
+                query={query}
+              />
+            </div>
+          ) : null}
+        </div>
       </div>
     </BaseLayout>
   );

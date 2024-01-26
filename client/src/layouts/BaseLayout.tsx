@@ -15,9 +15,7 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
           <div className="PlayPage__background">
             <img src="/images/wood-texture.jpg" alt="" className="PlayPage__bgImage" />
           </div>
-          <div className="Home__inner">
-            {children}
-          </div>
+          {children}
         </div>
       </main>
       <Footer></Footer>

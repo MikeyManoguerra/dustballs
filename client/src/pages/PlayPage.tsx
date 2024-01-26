@@ -55,32 +55,34 @@ export default function PlayPage() {
 
   return (
     <BaseLayout>
-      <div className="SonnetPage__header">
-        <h2 className="SonnetPage__heading">
-          Play Search
-        </h2>
-        <p className="SonnetPage__body">
-          Find Scenes In Shakespeare's plays that contain your search term.<br /> WARNING: under construction!
-          <img src="/images/cone.png" alt="" className="PlayPage__cone" />
-        </p>
-      </div>
-      <div className="PlayPage__forms">
-        <div className="PlayPage__formContent">
-          <Stage>
-            <form action="GET" onSubmit={e => handleSubmit(e)}>
-              <AppInput
-                name="playQuery"
-                onChange={event => setQuery(event.target.value)}
-                value={query}
-              />
-              <input className="PlayPage__formSubmit" type="submit" />
-            </form>
-          </Stage>
+      <div className="PlayPage__inner">
+        <div className="SonnetPage__header">
+          <h2 className="SonnetPage__heading">
+            Play Search
+          </h2>
+          <p className="SonnetPage__body">
+            Find Scenes In Shakespeare's plays that contain your search term.<br /> WARNING: under construction!
+            <img src="/images/cone.png" alt="" className="PlayPage__cone" />
+          </p>
         </div>
+        <div className="PlayPage__forms">
+          <div className="PlayPage__formContent">
+            <Stage>
+              <form action="GET" onSubmit={e => handleSubmit(e)}>
+                <AppInput
+                  name="playQuery"
+                  onChange={event => setQuery(event.target.value)}
+                  value={query}
+                />
+                <input className="PlayPage__formSubmit" type="submit" />
+              </form>
+            </Stage>
+          </div>
+        </div>
+        {
+          querySet.length ? playDisplay() : null
+        }
       </div>
-      {
-        querySet.length ? playDisplay() : null
-      }
     </BaseLayout>
   )
 }
