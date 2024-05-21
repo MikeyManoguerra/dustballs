@@ -16,7 +16,6 @@ from flask import (
 )
 
 
-
 from server.app import db as connection
 
 bp = Blueprint("plays", __name__, url_prefix="/plays")
@@ -46,6 +45,20 @@ def get_interaction(scene, query):
         interaction = scene[(index - 2) : (index + 3)]
 
     return {"interaction": interaction, "query_index": index}
+
+
+def title_case(title):
+    articles = ["a", "the", "an", "in", "and", "if", "but", "of"]
+    title = title.split(" ")
+
+
+    capitalized = []
+    for i, word in enumerate(title):
+        if i == 0 or (word not in articles):
+            word = word.capitalize()
+        capitalized.append(word)
+
+    return " ".join(capitalized)
 
 
 @bp.route("", methods=("POST", "GET"))
@@ -80,9 +93,18 @@ def random_scene():
 
     db = connection.get_db()
     random_number = str(random.randint(1, 155))
-    sonnet = db.sonnets.find_one({"title": random_number})
+    sonnet = db.plays.find_one({"title": random_number})
     return dumps([])
 
+# TODO: return title/slug object array below
+# content for linkedin of query
+
+@bp.route("/titles", methods=["GET"])
+def play_titles():
+    db = connection.get_db()
+    titles = db.scenes.distinct('title')
+    titles = [title_case(title) for title in titles]
+    return dumps(titles)
 
 # {'type': 'dialouge',
 # 'character': 'FABIAN.',

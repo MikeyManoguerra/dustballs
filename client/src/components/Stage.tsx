@@ -63,10 +63,9 @@ export default function StagePage(props: StageProps) {
           </div>
         </div>
       </div>
-      <div className="Stage__form">
-      <div className="Stage__formInner">
+      <div className="Stage__stage">
+
         {props.children}
-      </div>
       </div>
       <div className="Stage__rightColumn">
         <div className="Stage__column Stage__column--small">

@@ -8,3 +8,12 @@ export async function queryPlays(query: string) {
     throw err
   }
 }
+
+export async function getPlayTitles() {
+  try {
+    return await getApi(`/plays/titles`)
+  }
+  catch (err) {
+    throw err
+  }
+}

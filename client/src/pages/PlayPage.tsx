@@ -1,23 +1,34 @@
-import React, { useState, SyntheticEvent } from 'react';
+import React, { useState, SyntheticEvent, useEffect } from 'react';
 import { AppInput, Stage } from '../components'
 import { queryPlays } from '../api';
 import { isDirection } from '../models/direction';
 import { Play } from '../models/play';
 import BaseLayout from '../layouts/BaseLayout';
+import { getPlayTitles } from '../api/plays';
+import PlayForm from '../components/PlayForm';
+import { Sprite } from '../components/Sprite';
 
 
 
 export default function PlayPage() {
-  const [query, setQuery] = useState('');
+
   const [querySet, setQuerySet] = useState<Play[]>([]);
   const [randomResult, setRandomResult] = useState(0)
+  const [playTitles, setPlayTitles] = useState([])
 
-  async function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault();
-    const queryResponse: any = await queryPlays(query);
-    setQuerySet(queryResponse)
-    setRandomResult(Math.floor(Math.random() * queryResponse.length))
+  async function handleSubmit(event: string) {
+    const queryResponse: any = await queryPlays(event);
+    setQuerySet(queryResponse);
+    setRandomResult(Math.floor(Math.random() * queryResponse.length));
   }
+
+  useEffect(() => {
+    (async () => {
+      const titles = await getPlayTitles()
+      setPlayTitles(titles);
+    })();
+  }, [])
+
 
   const playDisplay = () => {
     const play = querySet[randomResult]
@@ -68,21 +79,17 @@ export default function PlayPage() {
         <div className="PlayPage__forms">
           <div className="PlayPage__formContent">
             <Stage>
-              <form action="GET" onSubmit={e => handleSubmit(e)}>
-                <AppInput
-                  name="playQuery"
-                  onChange={event => setQuery(event.target.value)}
-                  value={query}
-                />
-                <input className="PlayPage__formSubmit" type="submit" />
-              </form>
+              <Sprite></Sprite>
             </Stage>
           </div>
         </div>
-        {
-          querySet.length ? playDisplay() : null
-        }
-      </div>
-    </BaseLayout>
+
+      <PlayForm playTitles={playTitles} handleSubmit={v => handleSubmit(v)}></PlayForm>
+
+      {
+        querySet.length ? playDisplay() : null
+      }
+    </div>
+    </BaseLayout >
   )
 }

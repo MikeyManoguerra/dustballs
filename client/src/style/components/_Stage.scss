@@ -1,19 +1,40 @@
 .Stage {
   @include grid(0px);
   // break grid hardcoded
+  position: relative;
   margin-right: 0px;
   margin-left: -100px;
   max-width: 800px;
   grid-template-areas:
     "valence valence"
-    "left form ";
+    "left stage ";
   grid-template-columns: 1fr 3fr;
+
+
   @include breakpoint(medium) {
     grid-template-areas:
       "valence valence valence"
-      "left form right";
+      "left stage right";
     margin-left: 0px;
     grid-template-columns: 1fr 3fr 1fr;
+  }
+
+  &::after {
+
+  }
+
+  &::before {
+    // TODO breabkponts
+    position: absolute;
+    left: 150px;
+    bottom: 0px;
+    width: 61%;
+    height: 20px;
+
+    background-color: rgba($dark-red, 40%);
+    transform-origin: left center;
+    transform: rotate(-15deg);
+    content: "";
   }
 }
 
@@ -30,6 +51,7 @@
   height: 25px;
   background-image: linear-gradient($dark-grey, $dark-red);
 }
+
 .Stage__valenceLower {
   border-bottom-left-radius: 40px 100%;
   border-bottom-right-radius: 40px 100%;
@@ -46,34 +68,16 @@
   justify-self: start;
 }
 
-.Stage__form {
+.Stage__stage {
   position: relative;
-  grid-area: form;
-  margin-top: 50px;
-  padding-right: 100px;
-  min-width: 150px;
-
-  @include breakpoint(medium) {
-    padding-right: 0;
-  }
-}
-
-.Stage__formInner {
-  @include breakpoint(medium) {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: calc(100% + 80px);
-    transform: translateX(-50%);
-  }
-}
-
-.Stage__buttonWrap {
-  padding-top: 50px;
+  grid-area: stage;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 60px;
+// background: radial-gradient(circle at 50% 82%, $dark-grey, transparent 20%);
 }
+
 
 .Stage__rightColumn {
   grid-area: right;
@@ -227,6 +231,7 @@
 
   &:nth-child(3) {
     transform: matrix(0.5, -0.7, 0, 1, -8.5, -11);
+
     .Stage__columnBaseTopWing {
       &::after {
         position: absolute;

@@ -3,6 +3,7 @@ import { Sonnet, AppInput, Stage } from '../components'
 import { useToggle, useSonnet } from '../hooks'
 import BaseLayout from '../layouts/BaseLayout';
 import { Sprite } from '../components/Sprite';
+import SonnetForm from '../components/SonnetForm';
 
 export default function SonnetDisplay() {
   const {
@@ -16,16 +17,12 @@ export default function SonnetDisplay() {
   } = useSonnet()
 
   const [isExpanded, setIsExpanded] = useToggle()
-  const [userQuery, setUserQuery] = useState('')
   const [pause, setPause] = useState(false)
   // const [error, setError] = useState('')
 
-  async function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault();
-    setIsExpanded(false)
-
-    await handleUserSubmit(userQuery)
-    setUserQuery('')
+  async function handleSubmit(query: string) {
+    setIsExpanded(false);
+    await handleUserSubmit(query);
   }
 
   function displayNext(): void {
@@ -59,22 +56,7 @@ export default function SonnetDisplay() {
         </div>
         <div className="SonnetPage__sonnet">
           <div>
-            <form
-              className="SonnetPage__form"
-              action="GET"
-              onSubmit={e => handleSubmit(e)}
-            >
-              <AppInput
-                name="sonnetQuery"
-                value={userQuery}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setUserQuery(e.target.value)}
-              />
-              <input
-                className="SonnetPage__formButton"
-                type="submit"
-                value="Search"
-              />
-            </form>
+            <SonnetForm handleSubmit={query => handleSubmit(query)}></SonnetForm>
             <div className="SonnetPage__or">OR</div>
             <button
               type="button"
